@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holistic — Wellness &amp; Coaching</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #fef9ef;
+      --bg-2:      #f5ede1;
+      --text:      #2a2b2f;
+      --accent:    #99582a;
+      --muted:     rgba(42, 43, 47, 0.7);
+      --border:    rgba(153, 88, 41, 0.12);
+      --white-dim: rgba(254, 249, 239, 0.32);
+      --font-sans: 'Inter', sans-serif;
+      --font-serif: 'Instrument Serif', serif;
+    }
+
+    html { background: var(--bg); color: var(--text); font-family: var(--font-sans); }
+    body { overflow-x: hidden; }
+    img { display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── PILL ───────────────────────────────────────────── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 29px;
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.7px;
+      line-height: 21px;
+      white-space: nowrap;
+      backdrop-filter: blur(50px);
+    }
+    .pill--brown { background: var(--accent); color: var(--bg); }
+    .pill--beige { background: var(--bg-2); color: var(--text); }
+    .pill--glass { background: rgba(254, 249, 239, 0.24); color: var(--bg); }
+
+    /* ── BUTTON ─────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.8px;
+      line-height: 24px;
+      white-space: nowrap;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: opacity 0.18s;
+      border: none;
+    }
+    .btn:hover { opacity: 0.86; }
+    .btn--light  { background: var(--bg);   color: var(--text); }
+    .btn--cream  { background: var(--bg-2); color: var(--text); }
+    .btn--brown  { background: var(--accent); color: var(--bg); }
+    .btn--full   { width: 100%; }
+
+    /* ── NAV ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 72px;
+      padding: 0 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      background: rgba(255, 255, 255, 0.08);
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.14);
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav__logo img { height: 30px; width: auto; }
+    .nav__logo-name {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.9px;
+      color: #fff;
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav__links a {
+      font-size: 15px;
+      letter-spacing: -0.6px;
+      color: rgba(255, 255, 255, 0.65);
+      transition: color 0.18s;
+    }
+    .nav__links a:hover { color: #fff; }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 720px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 160px 64px 64px;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(22, 18, 14, 0.30);
+    }
+    .hero__content,
+    .hero__bottom { position: relative; z-index: 1; }
+
+    .hero__heading {
+      font-family: var(--font-serif);
+      font-size: 90px;
+      font-weight: 400;
+      color: var(--bg);
+      line-height: 1;
+      letter-spacing: -2.7px;
+      margin-top: 24px;
+      max-width: 510px;
+    }
+    .hero__sub {
+      font-size: 20px;
+      color: #f5ede1;
+      line-height: 1.5;
+      letter-spacing: -1px;
+      margin-top: 20px;
+      max-width: 446px;
+    }
+    .hero__ctas {
+      display: flex;
+      gap: 10px;
+      margin-top: 32px;
+    }
+    .hero__stats {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .hero__stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hero__stat-num {
+      font-size: 40px;
+      color: var(--bg);
+      letter-spacing: -2.8px;
+      line-height: 1.1;
+    }
+    .hero__stat-label {
+      font-size: 18px;
+      color: #f5ede1;
+      letter-spacing: -0.9px;
+      white-space: nowrap;
+    }
+    .hero__divider {
+      width: 1px;
+      height: 75px;
+      background: var(--white-dim);
+      flex-shrink: 0;
+    }
+
+    /* ── PRESS ──────────────────────────────────────────── */
+    .press {
+      background: var(--bg);
+      padding: 48px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+    .press__label {
+      font-size: 14px;
+      letter-spacing: -0.7px;
+      color: var(--muted);
+    }
+    .press__logos img {
+      width: 100%;
+      max-width: 960px;
+      height: auto;
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────── */
+    .about {
+      background: var(--bg-2);
+      display: flex;
+      align-items: stretch;
+      min-height: 1000px;
+    }
+    .about__image {
+      flex: 0 0 50%;
+      overflow: hidden;
+    }
+    .about__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about__body {
+      flex: 0 0 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      padding: 80px 64px;
+    }
+    .about__heading {
+      font-size: 56px;
+      font-weight: 400;
+      letter-spacing: -3.92px;
+      line-height: 1.1;
+    }
+    .about__heading em { color: var(--accent); font-style: normal; }
+    .about__sub {
+      font-size: 28px;
+      letter-spacing: -1.68px;
+      line-height: 1.3;
+      max-width: 440px;
+    }
+    .about__body p {
+      font-size: 18px;
+      letter-spacing: -0.9px;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 535px;
+    }
+    .about__body p + p { margin-top: 18px; }
+    .about__sig { height: 76px; width: auto; margin-top: 8px; }
+
+    /* ── SIGNS ──────────────────────────────────────────── */
+    .signs {
+      background: var(--bg);
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 64px;
+    }
+    .signs__title {
+      font-size: 56px;
+      font-weight: 400;
+      letter-spacing: -3.92px;
+      line-height: 1.1;
+      text-align: center;
+    }
+    .signs__title em { color: var(--accent); font-style: normal; }
+    .signs__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 400px);
+      gap: 16px;
+    }
+    .sign-card {
+      display: flex;
+      align-items: center;
+      background: var(--bg-2);
+      border-radius: 16px;
+      overflow: hidden;
+      height: 100px;
+    }
+    .sign-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .sign-card__text {
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.85px;
+      line-height: 1.4;
+      color: var(--text);
+      padding: 12px 16px;
+    }
+
+    /* ── SERVICES ───────────────────────────────────────── */
+    .services {
+      background: var(--bg);
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 64px;
+    }
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .section-header__title {
+      font-size: 56px;
+      font-weight: 400;
+      letter-spacing: -3.92px;
+      line-height: 1.1;
+    }
+    .section-header__title em { color: var(--accent); font-style: normal; }
+    .section-header__body {
+      font-size: 16px;
+      letter-spacing: -0.8px;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 363px;
+    }
+    .service-cards {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .service-card {
+      flex: 1;
+      background: var(--bg-2);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 500px;
+      padding: 32px;
+    }
+    .service-card__img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 325px;
+      object-fit: cover;
+    }
+    .service-card__body {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 293px; /* 325 - 32 */
+    }
+    .service-card__title {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -1.1px;
+      line-height: 1.3;
+    }
+    .service-card__desc {
+      font-size: 16px;
+      letter-spacing: -0.8px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* ── TESTIMONIALS ───────────────────────────────────── */
+    .testimonials {
+      background: var(--bg-2);
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 64px;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .testimonial-card {
+      background: var(--bg);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .testimonial-card__stars {
+      display: flex;
+      gap: 3px;
+    }
+    .testimonial-card__stars img { width: 15px; height: 15px; }
+    .testimonial-card__quote {
+      font-size: 15px;
+      letter-spacing: -0.6px;
+      line-height: 1.65;
+      color: var(--text);
+      flex: 1;
+    }
+    .testimonial-card__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-card__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .testimonial-card__name {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.7px;
+    }
+    .testimonial-card__role {
+      font-size: 13px;
+      letter-spacing: -0.5px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── PROGRAMS ───────────────────────────────────────── */
+    .programs {
+      background: var(--bg);
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 64px;
+    }
+    .program-cards {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      max-width: 1200px;
+      justify-content: center;
+    }
+    .program-card {
+      background: var(--bg-2);
+      border-radius: 16px;
+      padding: 32px;
+      width: 320px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+    .program-card--dark {
+      background: var(--text);
+      color: var(--bg);
+    }
+    .program-card__badge {
+      position: absolute;
+      top: -12px; right: 32px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: -0.6px;
+      padding: 4px 14px;
+      border-radius: 50px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+    }
+    .program-card__name {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -1.1px;
+    }
+    .program-card__price {
+      font-size: 40px;
+      letter-spacing: -2.8px;
+      line-height: 1;
+    }
+    .program-card__desc {
+      font-size: 15px;
+      letter-spacing: -0.6px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .program-card--dark .program-card__desc { color: rgba(254,249,239,0.55); }
+    .program-card__features-label {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.6px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .program-card--dark .program-card__features-label { color: rgba(254,249,239,0.45); }
+    .program-card__features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      list-style: none;
+    }
+    .program-card__feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.65px;
+    }
+    .program-card--dark .program-card__feature { color: var(--bg); }
+    .program-card__feature img { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ── CTA SECTION ────────────────────────────────────── */
+    .cta {
+      background: var(--bg-2);
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      text-align: center;
+    }
+    .cta img { height: 75px; width: auto; margin-bottom: 8px; }
+    .cta__title {
+      font-size: 56px;
+      font-weight: 400;
+      letter-spacing: -3.92px;
+      line-height: 1.1;
+      max-width: 557px;
+    }
+    .cta__title em { color: var(--accent); font-style: normal; }
+    .cta__sub {
+      font-size: 18px;
+      letter-spacing: -0.9px;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 318px;
+      margin-bottom: 8px;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--bg-2);
+      padding: 0 64px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+      border-top: 0.5px solid var(--border);
+    }
+    .footer__nav {
+      width: 100%;
+      max-width: 1072px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding-top: 48px;
+    }
+    .footer__col { display: flex; flex-direction: column; gap: 16px; }
+    .footer__col-title {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.8px;
+    }
+    .footer__col a {
+      font-size: 14px;
+      letter-spacing: -0.7px;
+      line-height: 1.5;
+      color: var(--text);
+      transition: color 0.18s;
+    }
+    .footer__col a:hover { color: var(--accent); }
+    .footer__bottom {
+      width: 100%;
+      max-width: 785px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer__rule { height: 0.5px; background: var(--border); }
+    .footer__copy {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer__copy p {
+      font-size: 14px;
+      letter-spacing: -0.7px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── MOTION: HERO ENTRANCE ──────────────────────────── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes scale-in {
+      from { opacity: 0; transform: scale(1.04); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .hero__bg img {
+      animation: scale-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero__content .pill {
+      opacity: 0;
+      animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    .hero__heading {
+      opacity: 0;
+      animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+    }
+    .hero__sub {
+      opacity: 0;
+      animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+    }
+    .hero__ctas {
+      opacity: 0;
+      animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.72s forwards;
+    }
+    .hero__stats {
+      opacity: 0;
+      animation: fade-in 0.8s ease 1s forwards;
+    }
+    nav {
+      opacity: 0;
+      animation: fade-in 0.5s ease 0.1s forwards;
+    }
+
+    /* ── MOTION: SCROLL REVEAL ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal--left {
+      transform: translateX(-40px);
+    }
+    .reveal--right {
+      transform: translateX(40px);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    /* stagger delays for groups */
+    .stagger > *          { opacity: 0; transform: translateY(32px);
+                            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                                        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1); }
+    .stagger.is-visible > *:nth-child(1)  { opacity: 1; transform: none; transition-delay: 0s; }
+    .stagger.is-visible > *:nth-child(2)  { opacity: 1; transform: none; transition-delay: 0.08s; }
+    .stagger.is-visible > *:nth-child(3)  { opacity: 1; transform: none; transition-delay: 0.16s; }
+    .stagger.is-visible > *:nth-child(4)  { opacity: 1; transform: none; transition-delay: 0.24s; }
+    .stagger.is-visible > *:nth-child(5)  { opacity: 1; transform: none; transition-delay: 0.32s; }
+    .stagger.is-visible > *:nth-child(6)  { opacity: 1; transform: none; transition-delay: 0.40s; }
+
+    /* ── MOTION: HOVER ──────────────────────────────────── */
+    .service-card {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(42, 43, 47, 0.10);
+    }
+    .service-card__img {
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .service-card:hover .service-card__img {
+      transform: scale(1.03);
+    }
+
+    .testimonial-card {
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(42, 43, 47, 0.08);
+    }
+
+    .program-card {
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .program-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(42, 43, 47, 0.09);
+    }
+
+    .sign-card {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sign-card:hover { transform: scale(1.02); }
+
+    /* nav scroll state — tighten glass when off hero */
+    nav.scrolled {
+      background: rgba(30, 24, 18, 0.55);
+      border-bottom-color: rgba(255, 255, 255, 0.10);
+    }
+    nav { transition: background 0.3s ease, border-color 0.3s ease; }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav__logo">
+      <img src="assets/logo.png" alt="Holistic" />
+      <span class="nav__logo-name">Holistic</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Journal</a></li>
+    </ul>
+    <a href="#" class="btn btn--brown">Book a Call</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg">
+      <img src="assets/hero-bg.png" alt="" />
+    </div>
+    <div class="hero__content">
+      <span class="pill pill--glass">Mind · Body · Lifestyle</span>
+      <h1 class="hero__heading">Where lasting change begins.</h1>
+      <p class="hero__sub">Compassionate, evidence-based wellness coaching for stress, anxiety, and burnout.</p>
+      <div class="hero__ctas">
+        <a href="#" class="btn btn--light">Begin Your Journey</a>
+        <a href="#" class="btn btn--brown">How I Can Help</a>
+      </div>
+    </div>
+    <div class="hero__bottom">
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-num">300+</span>
+          <span class="hero__stat-label">Hours of Coaching</span>
+        </div>
+        <div class="hero__divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">200+</span>
+          <span class="hero__stat-label">Client Sessions</span>
+        </div>
+        <div class="hero__divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">95%</span>
+          <span class="hero__stat-label">Report Reduced Stress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS -->
+  <section class="press">
+    <p class="press__label reveal">Featured in</p>
+    <div class="press__logos reveal">
+      <img src="assets/press-logos.png" alt="Press logos" />
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about__image reveal reveal--left">
+      <img src="assets/about-image.png" alt="Maya" />
+    </div>
+    <div class="about__body reveal reveal--right">
+      <span class="pill pill--brown">About me</span>
+      <div>
+        <h2 class="about__heading">Hi, I'm <em>Maya.</em></h2>
+        <p class="about__sub" style="margin-top: 12px;">I help overwhelmed professionals find their way back to themselves.</p>
+      </div>
+      <div>
+        <p>Five years ago, I was pulling 60-hour weeks and living on coffee, totally convinced I had it all figured out. Then my body had other ideas. Panic attacks, couldn't sleep, the whole mess.</p>
+        <p>I've been there, and I know how isolating it feels. Now I help people find their way back to feeling like themselves again.</p>
+      </div>
+      <img src="assets/signature.png" alt="Maya's signature" class="about__sig" />
+    </div>
+  </section>
+
+  <!-- SIGNS -->
+  <section class="signs">
+    <h2 class="signs__title reveal">The signs that something <em>needs</em><br>to change.</h2>
+    <div class="signs__grid stagger">
+      <div class="sign-card">
+        <img src="assets/signs-1.png" alt="" />
+        <span class="sign-card__text">You're tired all the time but you can't switch off</span>
+      </div>
+      <div class="sign-card">
+        <img src="assets/signs-2.png" alt="" />
+        <span class="sign-card__text">You're holding it all together but quietly falling apart</span>
+      </div>
+      <div class="sign-card">
+        <img src="assets/signs-3.png" alt="" />
+        <span class="sign-card__text">Successful on paper but something still feels deeply off</span>
+      </div>
+      <div class="sign-card">
+        <img src="assets/signs-4.png" alt="" />
+        <span class="sign-card__text">Self-help books and meditation apps just aren't cutting it</span>
+      </div>
+      <div class="sign-card">
+        <img src="assets/signs-5.png" alt="" />
+        <span class="sign-card__text">Resting feels wrong, like you should be doing more</span>
+      </div>
+      <div class="sign-card">
+        <img src="assets/signs-6.png" alt="" />
+        <span class="sign-card__text">You know something needs to change but can't start</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="section-header reveal">
+      <span class="pill pill--beige">Services</span>
+      <h2 class="section-header__title">Guiding you back to <em>balance.</em></h2>
+      <p class="section-header__body">Four key areas where gentle guidance and proven techniques create lasting transformation.</p>
+      <a href="#" class="btn btn--brown" style="margin-top: 8px;">Explore Services</a>
+    </div>
+    <div class="service-cards stagger">
+      <div class="service-card">
+        <img src="assets/service-1.png" alt="" class="service-card__img" />
+        <div class="service-card__body">
+          <h3 class="service-card__title">Stress &amp; Anxiety</h3>
+          <p class="service-card__desc">Gentle practices to calm your mind, ease tension, and bring you back.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="assets/service-2.png" alt="" class="service-card__img" />
+        <div class="service-card__body">
+          <h3 class="service-card__title">Burnout Recovery</h3>
+          <p class="service-card__desc">Rebuild your energy and rediscover your purpose without burning it all down.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="assets/service-3.png" alt="" class="service-card__img" />
+        <div class="service-card__body">
+          <h3 class="service-card__title">Life Transitions</h3>
+          <p class="service-card__desc">Support through career shifts, loss, and the in-between moments.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="assets/service-4.png" alt="" class="service-card__img" />
+        <div class="service-card__body">
+          <h3 class="service-card__title">Mindfulness Tech</h3>
+          <p class="service-card__desc">Practical techniques you can actually use, even on your worst days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="section-header reveal">
+      <span class="pill pill--brown">Real stories</span>
+      <h2 class="section-header__title">What clients are <em>saying.</em></h2>
+    </div>
+    <div class="testimonial-grid stagger">
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
+        </div>
+        <p class="testimonial-card__quote">"I used to lie awake replaying work conversations. Now I actually sleep through the night. Maya helped me find calm in the chaos."</p>
+        <div class="testimonial-card__author">
+          <img src="assets/testimonial-1.png" alt="" class="testimonial-card__avatar" />
+          <div>
+            <p class="testimonial-card__name">Sarah Silos</p>
+            <p class="testimonial-card__role">Marketing Director</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
+        </div>
+        <p class="testimonial-card__quote">"I thought burnout was just part of entrepreneurship. Maya taught me that boundaries actually make you more effective."</p>
+        <div class="testimonial-card__author">
+          <img src="assets/testimonial-2.png" alt="" class="testimonial-card__avatar" />
+          <div>
+            <p class="testimonial-card__name">Alex Morgan</p>
+            <p class="testimonial-card__role">Startup Founder</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
+        </div>
+        <p class="testimonial-card__quote">"Coming out of a hard career transition, I needed someone who actually listened. Maya gave me the tools to navigate it with clarity."</p>
+        <div class="testimonial-card__author">
+          <img src="assets/testimonial-3.png" alt="" class="testimonial-card__avatar" />
+          <div>
+            <p class="testimonial-card__name">Elena Azalea</p>
+            <p class="testimonial-card__role">Marketing Director</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
+        </div>
+        <p class="testimonial-card__quote">"Three months in and I finally feel like myself again. Honestly didn't think that was possible before working with Maya."</p>
+        <div class="testimonial-card__author">
+          <img src="assets/testimonial-4.png" alt="" class="testimonial-card__avatar" />
+          <div>
+            <p class="testimonial-card__name">James Wilson</p>
+            <p class="testimonial-card__role">Freelance Designer</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
+        </div>
+        <p class="testimonial-card__quote">"The group sessions were surprisingly powerful. There's something about being seen by others going through the same thing."</p>
+        <div class="testimonial-card__author">
+          <img src="assets/testimonial-5.png" alt="" class="testimonial-card__avatar" />
+          <div>
+            <p class="testimonial-card__name">Mika Wazowski</p>
+            <p class="testimonial-card__role">Sales Manager</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
+        </div>
+        <p class="testimonial-card__quote">"As a nurse I pour everything into others. Maya helped me understand that I matter too — and gave me real practices to act on that."</p>
+        <div class="testimonial-card__author">
+          <img src="assets/testimonial-6.png" alt="" class="testimonial-card__avatar" />
+          <div>
+            <p class="testimonial-card__name">Priya Patel</p>
+            <p class="testimonial-card__role">Nurse</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="programs">
+    <div class="section-header reveal">
+      <span class="pill pill--beige">Programs</span>
+      <h2 class="section-header__title">Choose your <em>path.</em></h2>
+      <p class="section-header__body">Choose from different ways to work together, designed to meet you wherever you are in your journey.</p>
+    </div>
+    <div class="program-cards stagger">
+
+      <!-- Solo -->
+      <div class="program-card">
+        <h3 class="program-card__name">Solo Sessions</h3>
+        <p class="program-card__price">$249</p>
+        <p class="program-card__desc">One-on-one coaching tailored entirely to your needs, on your schedule.</p>
+        <a href="#" class="btn btn--brown btn--full">Begin Your Journey</a>
+        <p class="program-card__features-label">What's included:</p>
+        <ul class="program-card__features">
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> 60-Minute 1:1 Session</li>
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Personalized Action Plan</li>
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Session Recording</li>
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Email Follow-Up</li>
+        </ul>
+      </div>
+
+      <!-- Calm Collective -->
+      <div class="program-card">
+        <span class="program-card__badge">Group Program</span>
+        <h3 class="program-card__name">Calm Collective</h3>
+        <p class="program-card__price">$899</p>
+        <p class="program-card__desc">Learn alongside others while receiving individual guidance tailored to you.</p>
+        <a href="#" class="btn btn--brown btn--full">Begin Your Journey</a>
+        <p class="program-card__features-label">What's included:</p>
+        <ul class="program-card__features">
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> 8 Weekly Group Calls (Max 6 People)</li>
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Private Community Access</li>
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Two 1:1 Check-Ins</li>
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Meditation Library</li>
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Weekly Exercises</li>
+          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> 3 Months Extended Access</li>
+        </ul>
+      </div>
+
+      <!-- Reset & Restore -->
+      <div class="program-card program-card--dark">
+        <h3 class="program-card__name">Reset &amp; Restore</h3>
+        <p class="program-card__price">$1,899</p>
+        <p class="program-card__desc">Deep, transformative work for those ready to make lasting change stick.</p>
+        <a href="#" class="btn btn--cream btn--full">Begin Your Journey</a>
+        <p class="program-card__features-label">What's included:</p>
+        <ul class="program-card__features">
+          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> 12 Weekly 1:1 Sessions</li>
+          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> In-Depth Assessment</li>
+          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> Unlimited Messaging Support</li>
+          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> Custom Wellness Plan</li>
+          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> Full Meditation Library</li>
+          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> 6 Months Extended Access</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <img src="assets/logo.png" alt="Holistic" class="reveal" />
+    <h2 class="cta__title reveal">You deserve to feel like <em>yourself</em> again.</h2>
+    <p class="cta__sub reveal">Book a free discovery call and let's talk about what's weighing you down.</p>
+    <a href="#" class="btn btn--brown reveal">Begin Your Journey</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer__nav">
+      <div class="footer__col">
+        <p class="footer__col-title">Navigate</p>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Journal</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Connect</p>
+        <a href="#">Book a Call</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+        <a href="#">Meta</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Legal</p>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__rule"></div>
+      <div class="footer__copy">
+        <p>© 2026 Holistic. All rights reserved.</p>
+        <p>Created by Hamza Ehsan</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ─────────────────────────────────────
+    const revealEls    = document.querySelectorAll('.reveal');
+    const staggerEls   = document.querySelectorAll('.stagger');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el  => observer.observe(el));
+    staggerEls.forEach(el => observer.observe(el));
+
+    // ── Nav scroll state ──────────────────────────────────
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
