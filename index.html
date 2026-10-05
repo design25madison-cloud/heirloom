@@ -22,13 +22,33 @@
       --white-dim: rgba(242, 242, 242, 0.32);
       --radius-md: 16px;
       --font-sans: 'Geist', sans-serif;
+
+      /* Heirloom brand tokens (Figma) */
+      --hl-text:      #2A1A12;
+      --hl-text-2:    #5C4C43;
+      --hl-text-3:    #8A7B72;
+      --hl-card:      #FCFAF6;
+      --hl-surface:   #F1EBE3;
+      --hl-canvas:    #F8F4EE;
+      --hl-border:    #E4DCD2;
+      --hl-on-accent: #FDF8F3;
+      --hl-shadow-card: 0 1px 1px rgba(48, 20, 8, 0.04), 0 8px 12px rgba(48, 20, 8, 0.12);
       --font-serif: 'Newsreader', serif;
     }
 
-    html { background: var(--bg); color: var(--text); font-family: var(--font-sans); }
+    html { background: var(--bg); color: var(--text); font-family: var(--font-sans); scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body { overflow-x: hidden; }
     img { display: block; }
     a { text-decoration: none; color: inherit; }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
 
     /* ── PILL ───────────────────────────────────────────── */
     .pill {
@@ -220,51 +240,148 @@
 
     /* ── ABOUT ──────────────────────────────────────────── */
     .about {
-      background: var(--bg-2);
-      display: flex;
-      align-items: stretch;
-      min-height: 1000px;
-    }
-    .about__image {
-      flex: 0 0 50%;
+      position: relative;
+      background: var(--bg);
+      padding: 150px 64px 140px;
       overflow: hidden;
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-    .about__image img {
+    .about__photos {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .about__photo {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .about__photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    .about__body {
-      flex: 0 0 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 24px;
-      padding: 80px 64px;
+    .about__photo--1 { left: 15.1%; top: 27.9%; transform: rotate(-9.95deg); }
+    .about__photo--2 { left:  8.3%; top: 52.2%; transform: rotate(6.5deg); }
+    .about__photo--3 { left: 79.1%; top:  8.7%; transform: rotate(-9.95deg); }
+    .about__photo--4 { left:  4.4%; top:  7.3%; transform: rotate(17.73deg); }
+    .about__photo--5 { left: 71.6%; top: 33.1%; transform: rotate(7.53deg); }
+    .about__photo--6 { left: 81.0%; top: 57.3%; transform: rotate(-9.03deg); }
+    .about__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 609px;
     }
     .about__heading {
       font-family: var(--font-serif);
-      font-size: 56px;
+      font-size: 68px;
       font-weight: 400;
-      letter-spacing: -3.92px;
-      line-height: 1.1;
+      color: #2a1a12;
+      line-height: 1.08;
+      letter-spacing: -1.02px;
     }
-    .about__heading em { color: var(--accent); font-style: normal; }
+    .about__heading em { font-style: italic; color: #8a180e; }
     .about__sub {
-      font-size: 28px;
-      letter-spacing: -1.68px;
-      line-height: 1.3;
-      max-width: 440px;
+      font-size: 17px;
+      color: #5c4c43;
+      line-height: 1.6;
+      margin-top: 22px;
+      max-width: 448px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .about__body p {
-      font-size: 18px;
-      letter-spacing: -0.9px;
-      line-height: 1.5;
-      color: var(--muted);
-      max-width: 535px;
+
+    /* ── HOW IT WORKS ──────────────────────────────────── */
+    .hiw {
+      background: #2a160c;
+      padding: 120px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .about__body p + p { margin-top: 18px; }
-    .about__sig { height: 76px; width: auto; margin-top: 8px; }
+    .hiw__inner {
+      width: 100%;
+      max-width: 1180px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+    .hiw__heading {
+      font-family: var(--font-serif);
+      font-size: 58px;
+      font-weight: 400;
+      color: #fdf8f3;
+      text-align: center;
+      letter-spacing: -0.87px;
+      line-height: 1.08;
+    }
+    .hiw__heading em { font-style: italic; }
+    .hiw__steps {
+      position: relative;
+      display: flex;
+      width: 100%;
+      margin-top: 56px;
+    }
+    .hiw__connector {
+      position: absolute;
+      left: calc(356px / 2);
+      top: 3px;
+      width: calc(100% - 356px);
+      height: 60px;
+      pointer-events: none;
+    }
+    .hiw__connector img { width: 100%; height: 100%; }
+    .hiw__step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+      padding: 0 12px;
+    }
+    .hiw__icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .hiw__icon--muted  { background: rgba(253, 248, 243, 0.20); }
+    .hiw__icon--white  { background: #fdf8f3; }
+    .hiw__icon--cream  { background: #fcfaf6; }
+    .hiw__icon img { width: 34px; height: 34px; }
+    .hiw__num {
+      font-size: 13px;
+      color: #fdf8f3;
+      letter-spacing: 0.96px;
+      line-height: 1.48;
+    }
+    .hiw__step-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 500;
+      color: #fdf8f3;
+      letter-spacing: -0.36px;
+      line-height: 1.08;
+    }
+    .hiw__step-desc {
+      font-size: 15px;
+      color: #fdf8f3;
+      line-height: 1.6;
+      max-width: 241px;
+    }
 
     /* ── SIGNS ──────────────────────────────────────────── */
     .signs {
@@ -312,15 +429,6 @@
       padding: 12px 16px;
     }
 
-    /* ── SERVICES ───────────────────────────────────────── */
-    .services {
-      background: var(--bg);
-      padding: 80px 64px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 64px;
-    }
     .section-header {
       display: flex;
       flex-direction: column;
@@ -345,51 +453,217 @@
       color: var(--muted);
       max-width: 363px;
     }
-    .service-cards {
+    /* ── FIT (tabbed audience section) ───────────────────── */
+    .fit {
+      background: var(--bg);
+      padding: 120px 0;
+    }
+    .fit__inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .fit__header {
       display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 16px;
-      width: 100%;
-      max-width: 1200px;
+      text-align: center;
     }
-    .service-card {
-      flex: 1;
-      background: var(--bg-2);
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-height: 500px;
-      padding: 32px;
-    }
-    .service-card__img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 325px;
-      object-fit: cover;
-    }
-    .service-card__body {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-top: 293px; /* 325 - 32 */
-    }
-    .service-card__title {
+    .fit__title {
       font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: -1.1px;
-      line-height: 1.3;
+      font-size: 58px;
+      font-weight: 400;
+      letter-spacing: -0.87px;
+      line-height: 62.64px;
+      color: var(--hl-text);
     }
-    .service-card__desc {
+    .fit__title em { font-style: italic; }
+    .fit__body {
+      max-width: 954px;
+      font-size: 17px;
+      line-height: 27.2px;
+      color: var(--hl-text-2);
+    }
+    .fit__tabs-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 36px 0 48px;
+    }
+    .fit__tabs {
+      position: relative;
+      display: flex;
+      gap: 4px;
+      padding: 5px;
+      background: var(--hl-card);
+      border: 1px solid var(--hl-border);
+      border-radius: 999px;
+    }
+    .fit__tab {
+      min-height: 44px;
+      padding: 0 22px;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--hl-text-2);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .fit__tab:hover { color: var(--hl-text); }
+    .fit__tab[aria-selected="true"] {
+      background: var(--accent);
+      color: var(--hl-on-accent);
+    }
+    .fit__tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    /* Sliding pill: once JS positions it, it replaces the selected tab's own fill */
+    .fit__tabs-indicator {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      pointer-events: none;
+    }
+    .fit__tabs.has-indicator .fit__tab { position: relative; z-index: 1; }
+    .fit__tabs.has-indicator .fit__tab[aria-selected="true"] { background: transparent; }
+    .fit__tabs.is-ready .fit__tabs-indicator {
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fit__tabs.is-ready .fit__tabs-indicator { transition: none; }
+    }
+    .fit__panel {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    .fit__panel[hidden] { display: none; }
+    .fit__content { flex: 1; min-width: 0; }
+    .fit__heading {
+      max-width: 455px;
+      padding-top: 14px;
+      font-family: var(--font-serif);
+      font-size: 44px;
+      font-weight: 400;
+      letter-spacing: -0.66px;
+      line-height: 47.52px;
+      color: var(--hl-text);
+    }
+    .fit__heading em { font-style: italic; color: var(--accent); }
+    .fit__lede {
+      max-width: 448px;
+      margin-top: 14px;
+      font-size: 17px;
+      line-height: 27.2px;
+      color: var(--hl-text-2);
+    }
+    .fit__steps {
+      list-style: none;
+      padding-top: 28px;
+    }
+    .fit__step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      column-gap: 16px;
+      padding: 18px 0;
+    }
+    .fit__steps--ruled .fit__step { border-top: 1px solid var(--hl-border); }
+    .fit__steps--ruled .fit__step:last-child { border-bottom: 1px solid var(--hl-border); }
+    .fit__step-num {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      line-height: 28px;
+      color: var(--accent);
+    }
+    .fit__step-title {
+      padding-bottom: 2px;
       font-size: 16px;
-      letter-spacing: -0.8px;
-      line-height: 1.5;
-      color: var(--muted);
+      font-weight: 600;
+      line-height: 25.6px;
+      color: var(--hl-text);
+    }
+    .fit__step-desc {
+      font-size: 15px;
+      line-height: 24px;
+      color: var(--hl-text-2);
+    }
+    .fit__card {
+      flex: 0 0 508px;
+      padding: 30px;
+      background: var(--hl-card);
+      border: 1px solid var(--hl-border);
+      border-radius: 24px;
+      box-shadow: var(--hl-shadow-card);
+    }
+    .fit__card-img {
+      width: 100%;
+      height: 236px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .fit__card-img--flat { height: 226px; border-radius: 0; }
+    .fit__card-label {
+      padding: 19px 0 18px;
+      font-size: 12px;
+      line-height: 19.2px;
+      letter-spacing: 0.72px;
+      text-transform: uppercase;
+      color: var(--hl-text-3);
+    }
+    .fit__features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      row-gap: 20px;
+    }
+    .fit__features--four {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 12px;
+    }
+    .fit__feature {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      font-size: 15px;
+      line-height: 21.75px;
+      color: var(--hl-text);
+    }
+    .fit__feature img { width: 24px; height: 24px; }
+    .fit__feature--inset { padding-left: 20px; white-space: nowrap; }
+    .fit__feature--wide  { grid-column: span 2; }
+    .fit__who {
+      margin: 24px 0 22px;
+      padding-top: 20px;
+      border-top: 1px solid var(--hl-border);
+      font-size: 15px;
+      line-height: 24px;
+      color: var(--hl-text-2);
+    }
+    .fit__who strong { font-weight: 600; color: var(--hl-text); }
+    .fit__cta {
+      width: 100%;
+      font-size: 15px;
+      letter-spacing: normal;
+      color: var(--hl-on-accent);
+    }
+
+    @media (max-width: 960px) {
+      .fit { padding: 80px 0; }
+      .fit__title { font-size: 44px; line-height: 1.1; }
+      .fit__panel { flex-direction: column; gap: 40px; }
+      .fit__card { flex-basis: auto; width: 100%; }
+    }
+    @media (max-width: 560px) {
+      .fit__tabs { flex-wrap: wrap; justify-content: center; border-radius: 24px; }
+      .fit__card { padding: 20px; }
+      .fit__features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .fit__feature--inset { padding-left: 0; white-space: normal; }
+      .fit__feature--wide  { grid-column: auto; }
     }
 
     /* ── WHY ────────────────────────────────────────────── */
@@ -563,93 +837,200 @@
       color: #8a7b72;
     }
 
-    /* ── PROGRAMS ───────────────────────────────────────── */
-    .programs {
+    /* ── WAITLIST ───────────────────────────────────────── */
+    .waitlist {
       background: var(--bg);
-      padding: 80px 64px;
+      padding: 120px 24px 110px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 64px;
+      text-align: center;
     }
-    .program-cards {
-      display: flex;
-      gap: 16px;
-      width: 100%;
-      max-width: 1200px;
-      justify-content: center;
-    }
-    .program-card {
-      background: var(--bg-2);
-      border-radius: 16px;
-      padding: 32px;
-      width: 320px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      position: relative;
-    }
-    .program-card--dark {
-      background: var(--text-dark);
-      color: var(--bg);
-    }
-    .program-card__badge {
-      position: absolute;
-      top: -12px; right: 32px;
-      background: var(--accent);
-      color: var(--bg);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: -0.6px;
-      padding: 4px 14px;
-      border-radius: 50px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-    }
-    .program-card__name {
+    .waitlist__mark { width: 64px; height: 69.28px; margin: 0 auto; }
+    .waitlist__title {
+      margin-top: 20px;
       font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: -1.1px;
+      font-size: 64px;
+      font-weight: 400;
+      letter-spacing: -0.96px;
+      line-height: 69.12px;
+      color: var(--hl-text);
     }
-    .program-card__price {
-      font-size: 40px;
-      letter-spacing: -2.8px;
-      line-height: 1;
+    .waitlist__title em { font-style: italic; color: var(--accent); }
+    .waitlist__body {
+      margin-top: 16px;
+      max-width: 440px;
+      font-size: 16px;
+      line-height: 25.6px;
+      color: var(--hl-text-2);
     }
-    .program-card__desc {
-      font-size: 15px;
-      letter-spacing: -0.6px;
-      line-height: 1.55;
-      color: var(--muted);
+    .waitlist__card {
+      scroll-margin-top: 96px; /* clear the fixed nav when jumped to */
+      width: 100%;
+      max-width: 660px;
+      margin-top: 44px;
+      padding: 32px;
+      background: var(--hl-card);
+      border: 1px solid var(--hl-border);
+      border-radius: 24px;
+      box-shadow: var(--hl-shadow-card);
+      text-align: left;
     }
-    .program-card--dark .program-card__desc { color: rgba(254,249,239,0.55); }
-    .program-card__features-label {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: -0.6px;
-      color: var(--muted);
-      margin-top: 4px;
+
+    /* Role switch — a radio group; the white pill slides via :has() */
+    .waitlist__roles {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      padding: 5px;
+      border: none;
+      border-radius: 999px;
+      background: var(--hl-surface);
     }
-    .program-card--dark .program-card__features-label { color: rgba(254,249,239,0.45); }
-    .program-card__features {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      list-style: none;
+    .waitlist__roles-pill {
+      position: absolute;
+      top: 5px;
+      bottom: 5px;
+      left: 5px;
+      width: calc((100% - 22px) / 3);
+      border-radius: 999px;
+      background: var(--hl-card);
+      box-shadow: 0 1px 1.5px rgba(48, 20, 8, 0.12);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .program-card__feature {
+    .waitlist__roles:has(input[value="nurse"]:checked)     .waitlist__roles-pill { transform: translateX(calc(100% + 6px)); }
+    .waitlist__roles:has(input[value="caregiver"]:checked) .waitlist__roles-pill { transform: translateX(calc(200% + 12px)); }
+    .waitlist__role { position: relative; }
+    .waitlist__role input { position: absolute; opacity: 0; pointer-events: none; }
+    .waitlist__role span {
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      min-height: 44px;
+      padding: 1px 6px;
+      border-radius: 999px;
       font-size: 14px;
       font-weight: 500;
-      letter-spacing: -0.65px;
+      color: var(--hl-text-2);
+      cursor: pointer;
+      transition: color 0.2s ease;
     }
-    .program-card--dark .program-card__feature { color: var(--bg); }
-    .program-card__feature img { width: 18px; height: 18px; flex-shrink: 0; }
+    .waitlist__role input:checked + span { color: var(--hl-text); }
+    .waitlist__role input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .waitlist__fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+    }
+    .waitlist__field { display: flex; flex-direction: column; gap: 6px; }
+    .waitlist__field--full { grid-column: 1 / -1; }
+    .waitlist__field[hidden] { display: none; }
+    .waitlist__label {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 20.8px;
+      color: var(--hl-text);
+    }
+    .waitlist__label small {
+      font-size: inherit;
+      font-weight: 400;
+      color: var(--hl-text-3);
+    }
+    .waitlist__input {
+      width: 100%;
+      min-height: 46px;
+      padding: 0 14px;
+      border: none;
+      border-radius: 10px;
+      background: var(--hl-canvas);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      color: var(--hl-text);
+      transition: box-shadow 0.15s ease;
+    }
+    .waitlist__input:focus { outline: none; box-shadow: 0 0 0 2px var(--accent); }
+    .waitlist__input:user-invalid { box-shadow: 0 0 0 1.5px var(--accent); }
+    .waitlist__input::placeholder { color: #757575; }
+    select.waitlist__input {
+      appearance: none;
+      padding-right: 40px;
+      background: var(--hl-canvas) url("assets/icon-chevron-down.svg") no-repeat right 15px center / 10px 6px;
+      cursor: pointer;
+    }
+    textarea.waitlist__input {
+      min-height: 88px;
+      padding: 12px 14px;
+      resize: vertical;
+      line-height: 1.4;
+    }
+    .waitlist__submit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .waitlist__submit .btn {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      letter-spacing: normal;
+      color: var(--hl-on-accent);
+    }
+    .waitlist__note {
+      font-size: 12px;
+      line-height: 19.2px;
+      color: var(--hl-text-3);
+    }
+    .waitlist__alt {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      margin-top: 22px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 25.6px;
+      color: var(--accent);
+    }
+    .waitlist__alt img { width: 16px; height: 16px; transition: transform 0.2s ease; }
+    .waitlist__alt:hover img { transform: translateX(3px); }
+    .waitlist__alt[hidden] { display: none; }
+    .waitlist__card.is-sent > :not(.waitlist__success) { display: none; }
+    .waitlist__success {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 40px 0 32px;
+      text-align: center;
+      animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .waitlist__success[hidden] { display: none; }
+    .waitlist__success img { width: 40px; height: 43.3px; }
+    .waitlist__success-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -0.48px;
+      color: var(--hl-text);
+    }
+    .waitlist__success-title em { font-style: italic; color: var(--accent); }
+
+    @media (max-width: 960px) {
+      .waitlist { padding: 80px 24px; }
+      .waitlist__title { font-size: 44px; line-height: 1.1; }
+    }
+    @media (max-width: 560px) {
+      .waitlist__card { padding: 20px; }
+      .waitlist__fields { grid-template-columns: 1fr; }
+      .waitlist__role span { font-size: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .waitlist__roles-pill { transition: none; }
+    }
 
     /* ── CTA SECTION ────────────────────────────────────── */
     .cta {
@@ -803,28 +1184,13 @@
     .stagger.is-visible > *:nth-child(6)  { opacity: 1; transform: none; transition-delay: 0.40s; }
 
     /* ── MOTION: HOVER ──────────────────────────────────── */
-    .service-card {
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(42, 43, 47, 0.10);
-    }
-    .service-card__img {
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .service-card:hover .service-card__img {
-      transform: scale(1.03);
-    }
-
-    .program-card {
+    .testimonial-card {
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
                   box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .program-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 36px rgba(42, 43, 47, 0.09);
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(42, 43, 47, 0.08);
     }
 
     .sign-card {
@@ -902,20 +1268,59 @@
 
   <!-- ABOUT -->
   <section class="about">
-    <div class="about__image reveal reveal--left">
-      <img src="assets/about-image.png" alt="Maya" />
+    <div class="about__photos">
+      <div class="about__photo about__photo--1"><img src="assets/about-scatter-1.png" alt="" /></div>
+      <div class="about__photo about__photo--2"><img src="assets/about-scatter-2.png" alt="" /></div>
+      <div class="about__photo about__photo--3"><img src="assets/about-scatter-3.png" alt="" /></div>
+      <div class="about__photo about__photo--4"><img src="assets/about-scatter-4.png" alt="" /></div>
+      <div class="about__photo about__photo--5"><img src="assets/about-scatter-5.png" alt="" /></div>
+      <div class="about__photo about__photo--6"><img src="assets/about-scatter-6.png" alt="" /></div>
     </div>
-    <div class="about__body reveal reveal--right">
-      <span class="pill pill--brown">About me</span>
-      <div>
-        <h2 class="about__heading">Hi, I'm <em>Maya.</em></h2>
-        <p class="about__sub" style="margin-top: 12px;">I help overwhelmed professionals find their way back to themselves.</p>
+    <div class="about__content reveal">
+      <h2 class="about__heading">Home care should be <em>led by a nurse.</em></h2>
+      <p class="about__sub">Home care today means rotating aides, no clinical leader, and families left to manage it all.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="hiw">
+    <div class="hiw__inner">
+      <div class="reveal">
+        <h2 class="hiw__heading">How it works.<br><em>Simple for you, handled by us.</em></h2>
       </div>
-      <div>
-        <p>Five years ago, I was pulling 60-hour weeks and living on coffee, totally convinced I had it all figured out. Then my body had other ideas. Panic attacks, couldn't sleep, the whole mess.</p>
-        <p>I've been there, and I know how isolating it feels. Now I help people find their way back to feeling like themselves again.</p>
+      <div class="hiw__steps stagger">
+        <img src="assets/hiw-connector.svg" alt="" class="hiw__connector" />
+        <div class="hiw__step">
+          <div class="hiw__icon hiw__icon--muted">
+            <img src="assets/hiw-icon-1.svg" alt="" />
+          </div>
+          <p class="hiw__num">01</p>
+          <div>
+            <p class="hiw__step-title">Meet your nurse</p>
+            <p class="hiw__step-desc">A dedicated RN assesses needs and builds a plan.</p>
+          </div>
+        </div>
+        <div class="hiw__step">
+          <div class="hiw__icon hiw__icon--muted">
+            <img src="assets/hiw-icon-2.svg" alt="" />
+          </div>
+          <p class="hiw__num">02</p>
+          <div>
+            <p class="hiw__step-title">Your care team</p>
+            <p class="hiw__step-desc">Vetted caregivers, led and mentored by your nurse.</p>
+          </div>
+        </div>
+        <div class="hiw__step">
+          <div class="hiw__icon hiw__icon--muted">
+            <img src="assets/hiw-icon-3.svg" alt="" />
+          </div>
+          <p class="hiw__num">03</p>
+          <div>
+            <p class="hiw__step-title">We handle the rest</p>
+            <p class="hiw__step-desc">Scheduling, coordination, and billing, done for you.</p>
+          </div>
+        </div>
       </div>
-      <img src="assets/signature.png" alt="Maya's signature" class="about__sig" />
     </div>
   </section>
 
@@ -950,41 +1355,171 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section class="services">
-    <div class="section-header reveal">
-      <span class="pill pill--beige">Services</span>
-      <h2 class="section-header__title">Guiding you back to <em>balance.</em></h2>
-      <p class="section-header__body">Four key areas where gentle guidance and proven techniques create lasting transformation.</p>
-      <a href="#" class="btn btn--brown" style="margin-top: 8px;">Explore Services</a>
-    </div>
-    <div class="service-cards stagger">
-      <div class="service-card">
-        <img src="assets/service-1.png" alt="" class="service-card__img" />
-        <div class="service-card__body">
-          <h3 class="service-card__title">Stress &amp; Anxiety</h3>
-          <p class="service-card__desc">Gentle practices to calm your mind, ease tension, and bring you back.</p>
+  <!-- SEE WHAT FITS YOU -->
+  <section class="fit">
+    <div class="fit__inner">
+      <div class="fit__header reveal">
+        <h2 class="fit__title">See what fits <em>you.</em></h2>
+        <p class="fit__body">Whether you're arranging care, leading it, or delivering it. There's a place for you at Heirloom. Nurses lead. Families get coordinated, Caregivers grow. Here's what that looks like from where you stand.</p>
+      </div>
+
+      <div class="fit__tabs-wrap reveal">
+        <div class="fit__tabs" role="tablist" aria-label="Choose your path">
+          <span class="fit__tabs-indicator" aria-hidden="true"></span>
+          <button class="fit__tab" role="tab" id="fit-tab-families" aria-selected="true" aria-controls="fit-panel-families">For families</button>
+          <button class="fit__tab" role="tab" id="fit-tab-nurses" aria-selected="false" aria-controls="fit-panel-nurses" tabindex="-1">For nurses</button>
+          <button class="fit__tab" role="tab" id="fit-tab-caregivers" aria-selected="false" aria-controls="fit-panel-caregivers" tabindex="-1">For caregivers</button>
         </div>
       </div>
-      <div class="service-card">
-        <img src="assets/service-2.png" alt="" class="service-card__img" />
-        <div class="service-card__body">
-          <h3 class="service-card__title">Burnout Recovery</h3>
-          <p class="service-card__desc">Rebuild your energy and rediscover your purpose without burning it all down.</p>
+
+      <div class="fit__panel" role="tabpanel" id="fit-panel-families" aria-labelledby="fit-tab-families">
+        <div class="fit__content reveal reveal--left">
+          <h3 class="fit__heading">Care led by a nurse. So <em>home</em> stays home.</h3>
+          <p class="fit__lede">Heirloom gives your loved one a dedicated nurse who leads their care at home — combining everyday support with real clinical oversight, so they can age in place safely, for longer.</p>
+          <ol class="fit__steps">
+            <li class="fit__step">
+              <span class="fit__step-num">1</span>
+              <div>
+                <p class="fit__step-title">Tell us about your loved one</p>
+                <p class="fit__step-desc">A quick intake on needs, schedule, and goals.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">2</span>
+              <div>
+                <p class="fit__step-title">Meet your nurse</p>
+                <p class="fit__step-desc">A dedicated RN assesses and builds a personalized care plan.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">3</span>
+              <div>
+                <p class="fit__step-title">Your care team starts</p>
+                <p class="fit__step-desc">Vetted caregivers deliver daily care, led by your nurse.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">4</span>
+              <div>
+                <p class="fit__step-title">Stay coordinated</p>
+                <p class="fit__step-desc">One point of contact; billing and scheduling handled.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="fit__card reveal reveal--right">
+          <img src="assets/fit-families.png" alt="An older adult's hands held gently by a caregiver" class="fit__card-img" />
+          <p class="fit__card-label">What's included</p>
+          <ul class="fit__features">
+            <li class="fit__feature"><img src="assets/icon-home-health.svg" alt="" />A dedicated nurse</li>
+            <li class="fit__feature"><img src="assets/icon-event-available.svg" alt="" />Full care coordination</li>
+            <li class="fit__feature fit__feature--inset"><img src="assets/icon-stethoscope.svg" alt="" />Clinical oversight</li>
+            <li class="fit__feature fit__feature--wide"><img src="assets/icon-routine.svg" alt="" />Regular updates</li>
+            <li class="fit__feature fit__feature--inset"><img src="assets/icon-volunteer-activism.svg" alt="" />Daily living support</li>
+          </ul>
+          <p class="fit__who"><strong>Who it's for:</strong> Aging adults who want to stay home; families managing care from near or far; and transitions after a hospital stay or a decline in health.</p>
+          <a href="#waitlist-form" class="btn btn--brown fit__cta" data-pick-role="family">Join the Family waitlist</a>
         </div>
       </div>
-      <div class="service-card">
-        <img src="assets/service-3.png" alt="" class="service-card__img" />
-        <div class="service-card__body">
-          <h3 class="service-card__title">Life Transitions</h3>
-          <p class="service-card__desc">Support through career shifts, loss, and the in-between moments.</p>
+
+      <div class="fit__panel" role="tabpanel" id="fit-panel-nurses" aria-labelledby="fit-tab-nurses" hidden>
+        <div class="fit__content">
+          <h3 class="fit__heading">Start your own home care practice. <em>Be your own boss.</em></h3>
+          <p class="fit__lede">You became a nurse to lead care, not to answer to a staffing agency. Heirloom gives you the practice — the patients, the team, the technology — so you can own your work, set your own terms, and share in the value you create.</p>
+          <ol class="fit__steps fit__steps--ruled">
+            <li class="fit__step">
+              <span class="fit__step-num">1</span>
+              <div>
+                <p class="fit__step-title">Apply to lead a practice</p>
+                <p class="fit__step-desc">Tell us about your experience.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">2</span>
+              <div>
+                <p class="fit__step-title">We bring the patients</p>
+                <p class="fit__step-desc">Heirloom handles acquisition and matching.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">3</span>
+              <div>
+                <p class="fit__step-title">We run the back office</p>
+                <p class="fit__step-desc">Caregiver recruiting, scheduling, billing, compliance.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">4</span>
+              <div>
+                <p class="fit__step-title">You lead care and share the upside</p>
+                <p class="fit__step-desc">Practice at the top of your license, own the outcome.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="fit__card">
+          <img src="assets/fit-nurses.jpg" alt="A nurse in scrubs holding a patient's hand" class="fit__card-img fit__card-img--flat" />
+          <p class="fit__card-label">What's included</p>
+          <ul class="fit__features fit__features--four">
+            <li class="fit__feature"><img src="assets/icon-account-child-invert.svg" alt="" />Patient acquisition</li>
+            <li class="fit__feature"><img src="assets/icon-phone-in-talk.svg" alt="" />Caregiver recruiting</li>
+            <li class="fit__feature"><img src="assets/icon-attach-money.svg" alt="" />Scheduling, billing, and payroll</li>
+            <li class="fit__feature"><img src="assets/icon-assured-workload.svg" alt="" />Compliance, credentialing</li>
+          </ul>
+          <p class="fit__who"><strong>Who we're looking for:</strong> Experienced RNs who want ownership and leadership — entrepreneurial, patient-first, ready to run something of their own.</p>
+          <a href="#waitlist-form" class="btn btn--brown fit__cta" data-pick-role="nurse">Join the Nurse waitlist</a>
         </div>
       </div>
-      <div class="service-card">
-        <img src="assets/service-4.png" alt="" class="service-card__img" />
-        <div class="service-card__body">
-          <h3 class="service-card__title">Mindfulness Tech</h3>
-          <p class="service-card__desc">Practical techniques you can actually use, even on your worst days.</p>
+
+      <div class="fit__panel" role="tabpanel" id="fit-panel-caregivers" aria-labelledby="fit-tab-caregivers" hidden>
+        <div class="fit__content">
+          <h3 class="fit__heading">Caregiving, with a nurse <em>in your corner.</em></h3>
+          <p class="fit__lede">At Heirloom, you never work alone. Every caregiver is supervised and trained by a registered nurse — so you learn on the job, grow your skills, and build a real career in care.</p>
+          <ol class="fit__steps fit__steps--ruled">
+            <li class="fit__step">
+              <span class="fit__step-num">1</span>
+              <div>
+                <p class="fit__step-title">Apply to join</p>
+                <p class="fit__step-desc">Tell us about your caregiving experience.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">2</span>
+              <div>
+                <p class="fit__step-title">Join a nurse-led team</p>
+                <p class="fit__step-desc">Work under the supervision of a registered nurse.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">3</span>
+              <div>
+                <p class="fit__step-title">Train and grow</p>
+                <p class="fit__step-desc">Get on-the-job mentorship and build your skills.</p>
+              </div>
+            </li>
+            <li class="fit__step">
+              <span class="fit__step-num">4</span>
+              <div>
+                <p class="fit__step-title">Advance your career</p>
+                <p class="fit__step-desc">Take on more as you develop, with our support.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="fit__card">
+          <img src="assets/fit-caregivers.jpg" alt="A caregiver embracing an older woman" class="fit__card-img fit__card-img--flat" />
+          <p class="fit__card-label">What's included</p>
+          <ul class="fit__features fit__features--four">
+            <li class="fit__feature"><img src="assets/icon-psychology-alt.svg" alt="" />A nurse mentor</li>
+            <li class="fit__feature"><img src="assets/icon-category.svg" alt="" />On-the-job training and skill-building</li>
+            <li class="fit__feature"><img src="assets/icon-conversion-path.svg" alt="" />A clear path for career advancement</li>
+            <li class="fit__feature"><img src="assets/icon-handshake.svg" alt="" />Relationship-based work</li>
+          </ul>
+          <p class="fit__who"><strong>Who it's for:</strong> Caregivers and aides who want to do their best work, keep learning, and build a future in care.</p>
+          <a href="#waitlist-form" class="btn btn--brown fit__cta" data-pick-role="caregiver">Join the Caregiver waitlist</a>
         </div>
       </div>
     </div>
@@ -1034,66 +1569,129 @@
     </div>
   </section>
 
-  <!-- PROGRAMS -->
-  <section class="programs">
-    <div class="section-header reveal">
-      <span class="pill pill--beige">Programs</span>
-      <h2 class="section-header__title">Choose your <em>path.</em></h2>
-      <p class="section-header__body">Choose from different ways to work together, designed to meet you wherever you are in your journey.</p>
+  <!-- WAITLIST -->
+  <section class="waitlist" id="waitlist">
+    <div class="reveal">
+      <img src="assets/heirloom-icon.svg" alt="" class="waitlist__mark" />
+      <h2 class="waitlist__title">Concierge nursing,<br />so <em>home</em> stays home.</h2>
+      <p class="waitlist__body">Join the waitlist and we'll be in touch as<br />Heirloom launches near you.</p>
     </div>
-    <div class="program-cards stagger">
 
-      <!-- Solo -->
-      <div class="program-card">
-        <h3 class="program-card__name">Solo Sessions</h3>
-        <p class="program-card__price">$249</p>
-        <p class="program-card__desc">One-on-one coaching tailored entirely to your needs, on your schedule.</p>
-        <a href="#" class="btn btn--brown btn--full">Begin Your Journey</a>
-        <p class="program-card__features-label">What's included:</p>
-        <ul class="program-card__features">
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> 60-Minute 1:1 Session</li>
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Personalized Action Plan</li>
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Session Recording</li>
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Email Follow-Up</li>
-        </ul>
+    <form class="waitlist__card reveal" id="waitlist-form" novalidate>
+      <fieldset class="waitlist__roles">
+        <legend class="visually-hidden">I am</legend>
+        <span class="waitlist__roles-pill" aria-hidden="true"></span>
+        <label class="waitlist__role"><input type="radio" name="role" value="family" checked /><span>I'm a family</span></label>
+        <label class="waitlist__role"><input type="radio" name="role" value="nurse" /><span>I'm a nurse</span></label>
+        <label class="waitlist__role"><input type="radio" name="role" value="caregiver" /><span>I'm a caregiver</span></label>
+      </fieldset>
+
+      <!-- Fields per the content doc's waitlist spec. data-roles = which audiences see a field;
+           DOM order is arranged so each role's set pairs up cleanly in the two-column grid. -->
+      <div class="waitlist__fields">
+        <div class="waitlist__field">
+          <label class="waitlist__label" for="wl-name">Name</label>
+          <input class="waitlist__input" id="wl-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="waitlist__field">
+          <label class="waitlist__label" for="wl-email">Email</label>
+          <input class="waitlist__input" id="wl-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="waitlist__field">
+          <label class="waitlist__label" for="wl-phone">Phone <small>(optional)</small></label>
+          <input class="waitlist__input" id="wl-phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+        <div class="waitlist__field" data-roles="family caregiver">
+          <label class="waitlist__label" for="wl-location">ZIP / location</label>
+          <input class="waitlist__input" id="wl-location" name="location" type="text" autocomplete="postal-code" required />
+        </div>
+
+        <div class="waitlist__field" data-roles="nurse">
+          <label class="waitlist__label" for="wl-license">License type</label>
+          <select class="waitlist__input" id="wl-license" name="license" required>
+            <option value="">Select…</option>
+            <option>RN</option>
+            <option>BSN, RN</option>
+            <option>NP / APRN</option>
+            <option>LPN / LVN</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="waitlist__field" data-roles="nurse">
+          <label class="waitlist__label" for="wl-states">State(s) licensed</label>
+          <input class="waitlist__input" id="wl-states" name="states" type="text" placeholder="e.g. CA, NY" required />
+        </div>
+        <div class="waitlist__field" data-roles="nurse">
+          <label class="waitlist__label" for="wl-years">Years of experience <small>(optional)</small></label>
+          <select class="waitlist__input" id="wl-years" name="years">
+            <option value="">Select…</option>
+            <option>Less than 2 years</option>
+            <option>2–5 years</option>
+            <option>5–10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+
+        <div class="waitlist__field" data-roles="family">
+          <label class="waitlist__label" for="wl-relationship">Relationship to care recipient <small>(optional)</small></label>
+          <select class="waitlist__input" id="wl-relationship" name="relationship">
+            <option value="">Select…</option>
+            <option>Spouse or partner</option>
+            <option>Adult child</option>
+            <option>Other family member</option>
+            <option>Friend or neighbor</option>
+            <option>Myself</option>
+          </select>
+        </div>
+        <div class="waitlist__field" data-roles="family">
+          <label class="waitlist__label" for="wl-timing">When is care needed? <small>(optional)</small></label>
+          <select class="waitlist__input" id="wl-timing" name="timing">
+            <option value="">Select…</option>
+            <option>As soon as possible</option>
+            <option>Within the next month</option>
+            <option>In 1–3 months</option>
+            <option>Just exploring</option>
+          </select>
+        </div>
+
+        <div class="waitlist__field" data-roles="caregiver">
+          <label class="waitlist__label" for="wl-experience">Caregiving experience <small>(optional)</small></label>
+          <select class="waitlist__input" id="wl-experience" name="experience">
+            <option value="">Select…</option>
+            <option>New to caregiving</option>
+            <option>Less than 1 year</option>
+            <option>1–3 years</option>
+            <option>3–5 years</option>
+            <option>5+ years</option>
+          </select>
+        </div>
+        <div class="waitlist__field" data-roles="caregiver">
+          <label class="waitlist__label" for="wl-certs">Certifications <small>(optional)</small></label>
+          <input class="waitlist__input" id="wl-certs" name="certifications" type="text" placeholder="e.g. CNA, HHA" />
+        </div>
+
+        <div class="waitlist__field waitlist__field--full" data-roles="family">
+          <label class="waitlist__label" for="wl-needs">Care needed <small>(optional)</small></label>
+          <textarea class="waitlist__input" id="wl-needs" name="needs" placeholder="A few words about your loved one's needs"></textarea>
+        </div>
       </div>
 
-      <!-- Calm Collective -->
-      <div class="program-card">
-        <span class="program-card__badge">Group Program</span>
-        <h3 class="program-card__name">Calm Collective</h3>
-        <p class="program-card__price">$899</p>
-        <p class="program-card__desc">Learn alongside others while receiving individual guidance tailored to you.</p>
-        <a href="#" class="btn btn--brown btn--full">Begin Your Journey</a>
-        <p class="program-card__features-label">What's included:</p>
-        <ul class="program-card__features">
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> 8 Weekly Group Calls (Max 6 People)</li>
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Private Community Access</li>
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Two 1:1 Check-Ins</li>
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Meditation Library</li>
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> Weekly Exercises</li>
-          <li class="program-card__feature"><img src="assets/icon-check2.svg" alt="" /> 3 Months Extended Access</li>
-        </ul>
+      <div class="waitlist__submit">
+        <button type="submit" class="btn btn--brown btn--full"><span data-role-cta>Join the family waitlist</span></button>
+        <p class="waitlist__note">We'll only use your details to follow up about Heirloom.</p>
       </div>
 
-      <!-- Reset & Restore -->
-      <div class="program-card program-card--dark">
-        <h3 class="program-card__name">Reset &amp; Restore</h3>
-        <p class="program-card__price">$1,899</p>
-        <p class="program-card__desc">Deep, transformative work for those ready to make lasting change stick.</p>
-        <a href="#" class="btn btn--cream btn--full">Begin Your Journey</a>
-        <p class="program-card__features-label">What's included:</p>
-        <ul class="program-card__features">
-          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> 12 Weekly 1:1 Sessions</li>
-          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> In-Depth Assessment</li>
-          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> Unlimited Messaging Support</li>
-          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> Custom Wellness Plan</li>
-          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> Full Meditation Library</li>
-          <li class="program-card__feature"><img src="assets/icon-check.svg" alt="" /> 6 Months Extended Access</li>
-        </ul>
+      <div class="waitlist__success" role="status" hidden>
+        <img src="assets/heirloom-icon.svg" alt="" />
+        <p class="waitlist__success-title">You're on the list — <em>we'll be in touch.</em></p>
+        <p class="waitlist__note">We'll reach out as Heirloom launches near you.</p>
       </div>
+    </form>
 
-    </div>
+    <a href="#waitlist-form" class="waitlist__alt" data-pick-role="nurse">
+      Are you a nurse? Apply to join
+      <img src="assets/icon-arrow-right.svg" alt="" />
+    </a>
   </section>
 
   <!-- CTA -->
@@ -1155,6 +1753,125 @@
 
     revealEls.forEach(el  => observer.observe(el));
     staggerEls.forEach(el => observer.observe(el));
+
+    // ── "See what fits you" tabs ──────────────────────────
+    // A tab only activates once its panel exists (aria-controls → element).
+    const fitTabList   = document.querySelector('.fit__tabs');
+    const fitIndicator = document.querySelector('.fit__tabs-indicator');
+    const fitTabs      = [...document.querySelectorAll('.fit__tab')];
+    const fitPanelOf   = (tab) => document.getElementById(tab.getAttribute('aria-controls'));
+    const fitPanels    = fitTabs.map(fitPanelOf).filter(Boolean);
+    const fitReduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const fitEase = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    let fitCurrent = fitTabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+    let fitSwapId = 0;
+
+    const moveFitIndicator = () => {
+      const tab = fitTabs[fitCurrent];
+      fitIndicator.style.width = tab.offsetWidth + 'px';
+      fitIndicator.style.height = tab.offsetHeight + 'px';
+      fitIndicator.style.transform = `translate(${tab.offsetLeft}px, ${tab.offsetTop}px)`;
+    };
+
+    const selectFitTab = (tab) => {
+      const i = fitTabs.indexOf(tab);
+      const panel = fitPanelOf(tab);
+      if (!panel || i === fitCurrent) return;
+
+      const dir = i > fitCurrent ? 1 : -1;   // slide toward the direction of travel
+      const outgoing = fitPanelOf(fitTabs[fitCurrent]);
+      const swapId = ++fitSwapId;
+      fitCurrent = i;
+
+      fitTabs.forEach(t => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', on);
+        t.tabIndex = on ? 0 : -1;
+      });
+      moveFitIndicator();
+
+      const showIncoming = () => {
+        if (swapId !== fitSwapId) return;    // a newer click took over
+        fitPanels.forEach(p => {
+          p.getAnimations().forEach(a => a.cancel());
+          p.hidden = p !== panel;
+        });
+        if (fitReduceMotion.matches) return;
+        panel.animate(
+          [{ opacity: 0, transform: `translateX(${dir * 48}px)` }, { opacity: 1, transform: 'none' }],
+          { duration: 450, easing: fitEase }
+        );
+      };
+
+      if (fitReduceMotion.matches || outgoing.hidden) return showIncoming();
+      outgoing.getAnimations().forEach(a => a.cancel());
+      outgoing.animate(
+        [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `translateX(${-dir * 48}px)` }],
+        { duration: 180, easing: 'ease-in', fill: 'forwards' }
+      ).onfinish = showIncoming;
+    };
+
+    fitTabList.classList.add('has-indicator');
+    moveFitIndicator();
+    requestAnimationFrame(() => fitTabList.classList.add('is-ready'));
+    document.fonts.ready.then(moveFitIndicator);
+    window.addEventListener('resize', moveFitIndicator, { passive: true });
+
+    fitTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => selectFitTab(tab));
+      tab.addEventListener('keydown', (e) => {
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (!step) return;
+        const next = fitTabs[(i + step + fitTabs.length) % fitTabs.length];
+        next.focus();
+        selectFitTab(next);
+      });
+    });
+
+    // ── Waitlist form ─────────────────────────────────────
+    const waitlist        = document.querySelector('.waitlist__card');
+    const waitlistAlt     = document.querySelector('.waitlist__alt');
+    const waitlistCta     = waitlist.querySelector('[data-role-cta]');
+    const waitlistSuccess = waitlist.querySelector('.waitlist__success');
+    const WAITLIST_CTA = {
+      family:    'Join the family waitlist',
+      nurse:     'Apply to join the waitlist',
+      caregiver: 'Join the caregiver waitlist',
+    };
+
+    const applyWaitlistRole = () => {
+      const role = waitlist.elements.role.value;
+      waitlistCta.textContent = WAITLIST_CTA[role];
+      // Show only this audience's fields; disabling the rest keeps their
+      // `required` from blocking submit and leaves them out of the payload.
+      waitlist.querySelectorAll('[data-roles]').forEach(field => {
+        const on = field.dataset.roles.split(' ').includes(role);
+        field.hidden = !on;
+        field.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = !on; });
+      });
+      waitlistAlt.hidden = role === 'nurse';
+    };
+    waitlist.addEventListener('change', (e) => {
+      if (e.target.name === 'role') applyWaitlistRole();
+    });
+    // Any link with data-pick-role (panel CTAs, "Are you a nurse?") jumps to the form with that role chosen
+    document.querySelectorAll('[data-pick-role]').forEach(link => {
+      link.addEventListener('click', () => {
+        waitlist.querySelector(`input[value="${link.dataset.pickRole}"]`).checked = true;
+        applyWaitlistRole();
+      });
+    });
+    applyWaitlistRole();
+
+    waitlist.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!waitlist.reportValidity()) return;
+      // TODO: nothing is sent yet — POST Object.fromEntries(new FormData(waitlist))
+      // to the waitlist tool / CRM before launch, and only show success once it resolves.
+      waitlist.classList.add('is-sent');
+      waitlistSuccess.hidden = false;
+      waitlistAlt.hidden = true;
+    });
 
     // ── Nav scroll state ──────────────────────────────────
     const nav = document.querySelector('nav');
