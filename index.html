@@ -102,25 +102,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      backdrop-filter: blur(20px) saturate(1.4);
-      -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      background: rgba(255, 255, 255, 0.08);
-      border-bottom: 0.5px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: transparent;
+      border-bottom: 0.5px solid rgba(22, 2, 2, 0.08);
     }
     .nav__logo {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .nav__logo img { height: 31.45px; width: auto; }
-    .nav__logo-name {
-      font-family: 'Romanica', serif;
-      font-size: 24px;
-      font-weight: 400;
-      letter-spacing: -0.24px;
-      line-height: 38.4px;
-      color: #8a180e;
-    }
+    .nav__logo img { height: 31px; width: auto; }
     .nav__links {
       display: flex;
       align-items: center;
@@ -130,10 +122,10 @@
     .nav__links a {
       font-size: 15px;
       letter-spacing: -0.6px;
-      color: rgba(255, 255, 255, 0.65);
+      color: rgba(22, 2, 2, 0.55);
       transition: color 0.18s;
     }
-    .nav__links a:hover { color: #fff; }
+    .nav__links a:hover { color: var(--text); }
 
     /* ── HERO ───────────────────────────────────────────── */
     .hero {
@@ -484,12 +476,22 @@
     @media (prefers-reduced-motion: reduce) {
       .fit__tabs.is-ready .fit__tabs-indicator { transition: none; }
     }
+    .fit__panels {
+      display: grid;
+    }
+    .fit__panels > .fit__panel {
+      grid-area: 1 / 1;
+    }
     .fit__panel {
       display: flex;
       align-items: flex-start;
       gap: 40px;
     }
-    .fit__panel[hidden] { display: none; }
+    .fit__panel[hidden] {
+      display: flex;
+      visibility: hidden;
+      pointer-events: none;
+    }
     .fit__content { flex: 1; min-width: 0; }
     .fit__heading {
       max-width: 455px;
@@ -1139,10 +1141,22 @@
 
     /* nav scroll state — tighten glass when off hero */
     nav.scrolled {
-      background: rgba(48, 20, 8, 0.65);
+      background: rgba(255, 255, 255, 0.12);
       border-bottom-color: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    }
+    nav.scrolled .nav__logo img { filter: brightness(0) invert(1); }
+    nav.scrolled .nav__links a { color: rgba(255, 255, 255, 0.70); }
+    nav.scrolled .nav__links a:hover { color: #fff; }
+    nav.scrolled .btn--brown {
+      background: rgba(255, 255, 255, 0.20);
+      color: #fff;
     }
     nav { transition: background 0.3s ease, border-color 0.3s ease; }
+    nav .nav__logo img,
+    nav .nav__links a,
+    nav .btn--brown { transition: filter 0.3s ease, color 0.3s ease, background 0.3s ease, opacity 0.18s; }
 
   </style>
 </head>
@@ -1151,8 +1165,7 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav__logo">
-      <img src="assets/heirloom-icon.svg" alt="Heirloom" />
-      <span class="nav__logo-name">HEIRLOOM</span>
+      <img src="assets/heirloom-logo-lockup.svg" alt="Heirloom" />
     </a>
     <ul class="nav__links">
       <li><a href="#">Home</a></li>
@@ -1256,6 +1269,7 @@
         </div>
       </div>
 
+      <div class="fit__panels">
       <div class="fit__panel" role="tabpanel" id="fit-panel-families" aria-labelledby="fit-tab-families">
         <div class="fit__content reveal reveal--left">
           <h3 class="fit__heading">Care led by a nurse. So <em>home</em> stays home.</h3>
@@ -1406,6 +1420,7 @@
           <a href="#waitlist-form" class="btn btn--brown fit__cta" data-pick-role="caregiver">Join the Caregiver waitlist</a>
         </div>
       </div>
+      </div><!-- /.fit__panels -->
     </div>
   </section>
 
@@ -1458,7 +1473,7 @@
     <div class="reveal">
       <img src="assets/heirloom-icon.svg" alt="" class="waitlist__mark" />
       <h2 class="waitlist__title">Concierge nursing,<br />so <em>home</em> stays home.</h2>
-      <p class="waitlist__body">Join the waitlist and we'll be in touch as<br />Heirloom launches near you.</p>
+      <p class="waitlist__body">Join the waitlist and we'll be in touch as Heirloom launches near you.</p>
     </div>
 
     <form class="waitlist__card reveal" id="waitlist-form" novalidate>
@@ -1582,7 +1597,7 @@
   <section class="cta">
     <a href="#" class="nav__logo reveal" style="justify-content: center;">
       <img src="assets/heirloom-icon.svg" alt="Heirloom" />
-      <span class="nav__logo-name">HEIRLOOM</span>
+      <img src="assets/heirloom-wordmark.svg" alt="HEIRLOOM" class="nav__logo-wordmark" />
     </a>
     <h2 class="cta__title reveal">You deserve to feel like <em>yourself</em> again.</h2>
     <p class="cta__sub reveal">Book a free discovery call and let's talk about what's weighing you down.</p>
