@@ -20,6 +20,7 @@
       --muted:     rgba(22, 2, 2, 0.65);
       --border:    rgba(138, 24, 14, 0.15);
       --white-dim: rgba(242, 242, 242, 0.32);
+      --radius-md: 16px;
       --font-sans: 'Geist', sans-serif;
       --font-serif: 'Newsreader', serif;
     }
@@ -409,10 +410,10 @@
     }
     .why__bg img {
       position: absolute;
-      top: 44%;
+      top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
-      height: 150%;
+      height: 118%;
       width: auto;
       max-width: none;
       filter: blur(3px);
@@ -452,13 +453,55 @@
       margin-top: 56px;
     }
     .why-card {
-      background: rgba(252, 250, 246, 0.05);
-      border: 1px solid rgba(252, 250, 246, 0.16);
-      border-radius: 16px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: rgba(252, 250, 246, 0.10);
+      border-radius: var(--radius-md, 16px);
       padding: 26px 22px;
       display: flex;
       flex-direction: column;
+      /* Frost 4 → light blur; Refraction 80 → saturate/brighten the bent light */
+      backdrop-filter: blur(2px) saturate(1.5) brightness(1.08);
+      -webkit-backdrop-filter: blur(2px) saturate(1.5) brightness(1.08);
+      /* Depth 20 → beveled inner edges: light top-left (37°), shadow bottom-right */
+      box-shadow:
+        inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.32),
+        inset -1.5px -1.5px 1px rgba(0, 0, 0, 0.22),
+        0 10px 30px rgba(0, 0, 0, 0.22);
     }
+    /* Light 37° 100% → specular sheen from the upper-left */
+    .why-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(143deg,
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(255, 255, 255, 0.05) 28%,
+        rgba(255, 255, 255, 0) 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* Refraction 80 + Dispersion 50 → bright refractive rim with chromatic split */
+    .why-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.28) 30%,
+        rgba(255, 255, 255, 0.06) 52%,
+        rgba(255, 255, 255, 0.4) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .why-card > * { position: relative; z-index: 2; }
     .why-card__icon { width: 28px; height: 28px; }
     .why-card__title {
       font-family: var(--font-serif);
@@ -502,7 +545,7 @@
     .founder__quote {
       font-family: var(--font-serif);
       font-size: 32px;
-      font-weight: 400;
+      font-weight: 300;
       letter-spacing: -1px;
       line-height: 1.4;
       color: #fdf8f3;
@@ -773,15 +816,6 @@
     }
     .service-card:hover .service-card__img {
       transform: scale(1.03);
-    }
-
-    .why-card {
-      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-                  background 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .why-card:hover {
-      transform: translateY(-3px);
-      background: rgba(252, 250, 246, 0.14);
     }
 
     .program-card {
