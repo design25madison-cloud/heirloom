@@ -137,106 +137,97 @@
 
     /* ── HERO ───────────────────────────────────────────── */
     .hero {
-      position: relative;
+      padding: 12px;
+      padding-top: calc(72px + 12px);
       width: 100%;
-      height: 100vh;
-      min-height: 720px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 160px 64px 64px;
     }
-    .hero__bg {
+    .hero__inner {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      height: 681px;
+    }
+    .hero__photo {
       position: absolute;
       inset: 0;
-      z-index: 0;
-    }
-    .hero__bg img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
     }
-    .hero__bg::after {
-      content: '';
+    .hero__overlay {
       position: absolute;
       inset: 0;
-      background: rgba(22, 2, 2, 0.30);
+      background: linear-gradient(to bottom, rgba(30,12,6,0) 35%, rgba(30,12,6,0.62) 100%);
     }
-    .hero__content,
-    .hero__bottom { position: relative; z-index: 1; }
-
+    .hero__content {
+      position: absolute;
+      top: 98px;
+      left: 0;
+      width: 760px;
+      max-width: 760px;
+      padding: 56px;
+    }
     .hero__heading {
       font-family: var(--font-serif);
-      font-size: 90px;
+      font-size: 84px;
       font-weight: 400;
-      color: var(--bg);
-      line-height: 1;
-      letter-spacing: -2.7px;
-      margin-top: 24px;
-      max-width: 510px;
+      color: #fff;
+      line-height: 1.08;
+      letter-spacing: -1.26px;
+      margin-top: 18px;
+    }
+    .hero__heading em {
+      font-style: italic;
+      font-weight: 500;
     }
     .hero__sub {
-      font-size: 20px;
-      color: var(--bg-2);
-      line-height: 1.5;
-      letter-spacing: -1px;
-      margin-top: 20px;
-      max-width: 446px;
+      font-size: 18px;
+      color: #fff;
+      line-height: 1.6;
+      margin-top: 18px;
+      max-width: 536px;
+      opacity: 0.92;
     }
     .hero__ctas {
       display: flex;
-      gap: 10px;
-      margin-top: 32px;
-    }
-    .hero__stats {
-      display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
+      margin-top: 30px;
     }
-    .hero__stat {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .hero__stat-num {
-      font-size: 40px;
-      color: var(--bg);
-      letter-spacing: -2.8px;
-      line-height: 1.1;
-    }
-    .hero__stat-label {
-      font-size: 18px;
-      color: var(--bg-2);
-      letter-spacing: -0.9px;
+    .hero-btn--waitlist {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+      height: 44px;
+      border-radius: 999px;
+      background: rgba(248, 244, 238, 0.25);
+      border: 1px solid transparent;
+      color: #fdf8f3;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 500;
       white-space: nowrap;
+      backdrop-filter: blur(12px);
+      transition: opacity 0.18s;
     }
-    .hero__divider {
-      width: 1px;
-      height: 75px;
-      background: var(--white-dim);
-      flex-shrink: 0;
-    }
-
-    /* ── PRESS ──────────────────────────────────────────── */
-    .press {
-      background: var(--bg);
-      padding: 48px 64px;
-      display: flex;
-      flex-direction: column;
+    .hero-btn--waitlist:hover { opacity: 0.8; }
+    .hero-btn--nurse {
+      display: inline-flex;
       align-items: center;
-      gap: 28px;
+      gap: 6px;
+      height: 44px;
+      color: #fdf8f3;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: opacity 0.18s;
     }
-    .press__label {
-      font-size: 14px;
-      letter-spacing: -0.7px;
-      color: var(--muted);
-    }
-    .press__logos img {
-      width: 100%;
-      max-width: 960px;
-      height: auto;
-    }
+    .hero-btn--nurse:hover { opacity: 0.8; }
+    .hero-btn--nurse img { width: 16px; height: 16px; display: inline; }
+
 
     /* ── ABOUT ──────────────────────────────────────────── */
     .about {
@@ -381,53 +372,9 @@
       color: #fdf8f3;
       line-height: 1.6;
       max-width: 241px;
+      margin-top: 8px;
     }
 
-    /* ── SIGNS ──────────────────────────────────────────── */
-    .signs {
-      background: var(--bg);
-      padding: 80px 64px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 64px;
-    }
-    .signs__title {
-      font-family: var(--font-serif);
-      font-size: 56px;
-      font-weight: 400;
-      letter-spacing: -3.92px;
-      line-height: 1.1;
-      text-align: center;
-    }
-    .signs__title em { color: var(--accent); font-style: normal; }
-    .signs__grid {
-      display: grid;
-      grid-template-columns: repeat(2, 400px);
-      gap: 16px;
-    }
-    .sign-card {
-      display: flex;
-      align-items: center;
-      background: var(--bg-3);
-      border-radius: 16px;
-      overflow: hidden;
-      height: 100px;
-    }
-    .sign-card img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .sign-card__text {
-      font-size: 17px;
-      font-weight: 500;
-      letter-spacing: -0.85px;
-      line-height: 1.4;
-      color: var(--text);
-      padding: 12px 16px;
-    }
 
     .section-header {
       display: flex;
@@ -1126,12 +1073,8 @@
       to   { opacity: 1; transform: scale(1); }
     }
 
-    .hero__bg img {
+    .hero__photo {
       animation: scale-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .hero__content .pill {
-      opacity: 0;
-      animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
     }
     .hero__heading {
       opacity: 0;
@@ -1144,10 +1087,6 @@
     .hero__ctas {
       opacity: 0;
       animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.72s forwards;
-    }
-    .hero__stats {
-      opacity: 0;
-      animation: fade-in 0.8s ease 1s forwards;
     }
     nav {
       opacity: 0;
@@ -1226,45 +1165,20 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero__bg">
-      <img src="assets/hero-bg.png" alt="" />
-    </div>
-    <div class="hero__content">
-      <span class="pill pill--glass">Mind · Body · Lifestyle</span>
-      <h1 class="hero__heading">Where lasting change begins.</h1>
-      <p class="hero__sub">Compassionate, evidence-based wellness coaching for stress, anxiety, and burnout.</p>
-      <div class="hero__ctas">
-        <a href="#" class="btn btn--light">Begin Your Journey</a>
-        <a href="#" class="btn btn--brown">How I Can Help</a>
-      </div>
-    </div>
-    <div class="hero__bottom">
-      <div class="hero__stats">
-        <div class="hero__stat">
-          <span class="hero__stat-num">300+</span>
-          <span class="hero__stat-label">Hours of Coaching</span>
-        </div>
-        <div class="hero__divider"></div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">200+</span>
-          <span class="hero__stat-label">Client Sessions</span>
-        </div>
-        <div class="hero__divider"></div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">95%</span>
-          <span class="hero__stat-label">Report Reduced Stress</span>
+    <div class="hero__inner">
+      <img src="assets/hero-bg.png" alt="" class="hero__photo" />
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1 class="hero__heading">Concierge nursing, so <em>home</em> stays home.</h1>
+        <p class="hero__sub">Heirloom pairs families with a dedicated nurse who leads care at home — coordinated, personal, and built around you.</p>
+        <div class="hero__ctas">
+          <a href="#" class="hero-btn--waitlist">Join the waitlist</a>
+          <a href="#" class="hero-btn--nurse">Are you a nurse? <img src="assets/icon-arrow-white.svg" alt="" /></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRESS -->
-  <section class="press">
-    <p class="press__label reveal">Featured in</p>
-    <div class="press__logos reveal">
-      <img src="assets/press-logos.png" alt="Press logos" />
-    </div>
-  </section>
 
   <!-- ABOUT -->
   <section class="about">
@@ -1324,36 +1238,6 @@
     </div>
   </section>
 
-  <!-- SIGNS -->
-  <section class="signs">
-    <h2 class="signs__title reveal">The signs that something <em>needs</em><br>to change.</h2>
-    <div class="signs__grid stagger">
-      <div class="sign-card">
-        <img src="assets/signs-1.png" alt="" />
-        <span class="sign-card__text">You're tired all the time but you can't switch off</span>
-      </div>
-      <div class="sign-card">
-        <img src="assets/signs-2.png" alt="" />
-        <span class="sign-card__text">You're holding it all together but quietly falling apart</span>
-      </div>
-      <div class="sign-card">
-        <img src="assets/signs-3.png" alt="" />
-        <span class="sign-card__text">Successful on paper but something still feels deeply off</span>
-      </div>
-      <div class="sign-card">
-        <img src="assets/signs-4.png" alt="" />
-        <span class="sign-card__text">Self-help books and meditation apps just aren't cutting it</span>
-      </div>
-      <div class="sign-card">
-        <img src="assets/signs-5.png" alt="" />
-        <span class="sign-card__text">Resting feels wrong, like you should be doing more</span>
-      </div>
-      <div class="sign-card">
-        <img src="assets/signs-6.png" alt="" />
-        <span class="sign-card__text">You know something needs to change but can't start</span>
-      </div>
-    </div>
-  </section>
 
   <!-- SEE WHAT FITS YOU -->
   <section class="fit">

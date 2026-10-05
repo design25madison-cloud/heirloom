@@ -1,5 +1,5 @@
 <svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="900" height="60" viewBox="0 0 900 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Connector">
-<path id="Vector" d="M58.5 27C208.5 -13 300 -1.07288e-05 450 30C600 60 625 73.5 775 33.5" stroke="#8A7B72" stroke-width="1.5" stroke-dasharray="4 6"/>
+<path id="Vector" d="M58.5 27C208.5 -13 300 0 450 30C600 60 691.5 60 841.5 27" stroke="#8A7B72" stroke-width="1.5" stroke-dasharray="4 6"/>
 </g>
 </svg>
