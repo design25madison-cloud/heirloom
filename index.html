@@ -6,20 +6,22 @@
   <title>Holistic — Wellness &amp; Coaching</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Geist:wght@100..900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #fef9ef;
-      --bg-2:      #f5ede1;
-      --text:      #2a2b2f;
-      --accent:    #99582a;
-      --muted:     rgba(42, 43, 47, 0.7);
-      --border:    rgba(153, 88, 41, 0.12);
-      --white-dim: rgba(254, 249, 239, 0.32);
-      --font-sans: 'Inter', sans-serif;
-      --font-serif: 'Instrument Serif', serif;
+      --bg:        #F2F2F2;
+      --bg-2:      #E7E4E3;
+      --bg-3:      #CCC3BE;
+      --text:      #160202;
+      --text-dark: #301408;
+      --accent:    #8A180E;
+      --muted:     rgba(22, 2, 2, 0.65);
+      --border:    rgba(138, 24, 14, 0.15);
+      --white-dim: rgba(242, 242, 242, 0.32);
+      --font-sans: 'Geist', sans-serif;
+      --font-serif: 'Newsreader', serif;
     }
 
     html { background: var(--bg); color: var(--text); font-family: var(--font-sans); }
@@ -138,7 +140,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(22, 18, 14, 0.30);
+      background: rgba(22, 2, 2, 0.30);
     }
     .hero__content,
     .hero__bottom { position: relative; z-index: 1; }
@@ -155,7 +157,7 @@
     }
     .hero__sub {
       font-size: 20px;
-      color: #f5ede1;
+      color: var(--bg-2);
       line-height: 1.5;
       letter-spacing: -1px;
       margin-top: 20px;
@@ -184,7 +186,7 @@
     }
     .hero__stat-label {
       font-size: 18px;
-      color: #f5ede1;
+      color: var(--bg-2);
       letter-spacing: -0.9px;
       white-space: nowrap;
     }
@@ -240,6 +242,7 @@
       padding: 80px 64px;
     }
     .about__heading {
+      font-family: var(--font-serif);
       font-size: 56px;
       font-weight: 400;
       letter-spacing: -3.92px;
@@ -272,6 +275,7 @@
       gap: 64px;
     }
     .signs__title {
+      font-family: var(--font-serif);
       font-size: 56px;
       font-weight: 400;
       letter-spacing: -3.92px;
@@ -287,7 +291,7 @@
     .sign-card {
       display: flex;
       align-items: center;
-      background: var(--bg-2);
+      background: var(--bg-3);
       border-radius: 16px;
       overflow: hidden;
       height: 100px;
@@ -326,6 +330,7 @@
       max-width: 1200px;
     }
     .section-header__title {
+      font-family: var(--font-serif);
       font-size: 56px;
       font-weight: 400;
       letter-spacing: -3.92px;
@@ -373,6 +378,7 @@
       margin-top: 293px; /* 325 - 32 */
     }
     .service-card__title {
+      font-family: var(--font-serif);
       font-size: 22px;
       font-weight: 500;
       letter-spacing: -1.1px;
@@ -473,7 +479,7 @@
       position: relative;
     }
     .program-card--dark {
-      background: var(--text);
+      background: var(--text-dark);
       color: var(--bg);
     }
     .program-card__badge {
@@ -491,6 +497,7 @@
       align-items: center;
     }
     .program-card__name {
+      font-family: var(--font-serif);
       font-size: 22px;
       font-weight: 500;
       letter-spacing: -1.1px;
@@ -544,6 +551,7 @@
     }
     .cta img { height: 75px; width: auto; margin-bottom: 8px; }
     .cta__title {
+      font-family: var(--font-serif);
       font-size: 56px;
       font-weight: 400;
       letter-spacing: -3.92px;
@@ -723,7 +731,7 @@
 
     /* nav scroll state — tighten glass when off hero */
     nav.scrolled {
-      background: rgba(30, 24, 18, 0.55);
+      background: rgba(48, 20, 8, 0.65);
       border-bottom-color: rgba(255, 255, 255, 0.10);
     }
     nav { transition: background 0.3s ease, border-color 0.3s ease; }
