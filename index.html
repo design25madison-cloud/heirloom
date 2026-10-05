@@ -391,64 +391,133 @@
       color: var(--muted);
     }
 
-    /* ── TESTIMONIALS ───────────────────────────────────── */
-    .testimonials {
-      background: var(--bg-2);
-      padding: 80px 64px;
+    /* ── WHY ────────────────────────────────────────────── */
+    .why {
+      position: relative;
+      overflow: hidden;
+      background: #2a160c;
+      padding: 120px 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 64px;
     }
-    .testimonial-grid {
+    .why__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .why__bg img {
+      position: absolute;
+      top: 44%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 150%;
+      width: auto;
+      max-width: none;
+      filter: blur(3px);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 78%, transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    }
+    .why__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .why__inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .why__title {
+      font-family: var(--font-serif);
+      font-size: 58px;
+      font-weight: 400;
+      letter-spacing: -0.87px;
+      line-height: 1.08;
+      text-align: center;
+      color: #fdf8f3;
+    }
+    .why__title em { font-style: italic; }
+    .why-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       width: 100%;
-      max-width: 1200px;
+      margin-top: 56px;
     }
-    .testimonial-card {
-      background: var(--bg);
+    .why-card {
+      background: rgba(252, 250, 246, 0.05);
+      border: 1px solid rgba(252, 250, 246, 0.16);
       border-radius: 16px;
-      padding: 28px;
+      padding: 26px 22px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
     }
-    .testimonial-card__stars {
+    .why-card__icon { width: 28px; height: 28px; }
+    .why-card__title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.33px;
+      line-height: 1.08;
+      color: #fdf8f3;
+      margin-top: 18px;
+    }
+    .why-card__desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(253, 248, 243, 0.65);
+      margin-top: 6px;
+    }
+
+    /* ── FOUNDER QUOTE ──────────────────────────────────── */
+    .founder {
+      background: #2a160c;
+      padding: 120px 64px;
       display: flex;
-      gap: 3px;
+      justify-content: center;
     }
-    .testimonial-card__stars img { width: 15px; height: 15px; }
-    .testimonial-card__quote {
-      font-size: 15px;
-      letter-spacing: -0.6px;
-      line-height: 1.65;
-      color: var(--text);
-      flex: 1;
-    }
-    .testimonial-card__author {
+    .founder__inner {
+      width: 100%;
+      max-width: 1152px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 120px;
     }
-    .testimonial-card__avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
+    .founder__photo {
+      width: 392px;
+      height: 445px;
       flex-shrink: 0;
+      border-radius: 16px;
+      object-fit: cover;
+      background: #0a0a0a;
     }
-    .testimonial-card__name {
-      font-size: 14px;
+    .founder__body { flex: 1; min-width: 0; }
+    .founder__quote {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -1px;
+      line-height: 1.4;
+      color: #fdf8f3;
+    }
+    .founder__name {
+      font-size: 18px;
       font-weight: 500;
-      letter-spacing: -0.7px;
+      line-height: 1.7;
+      color: #fdf8f3;
+      margin-top: 32px;
     }
-    .testimonial-card__role {
-      font-size: 13px;
-      letter-spacing: -0.5px;
-      color: var(--muted);
-      margin-top: 2px;
+    .founder__role {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #8a7b72;
     }
 
     /* ── PROGRAMS ───────────────────────────────────────── */
@@ -706,13 +775,13 @@
       transform: scale(1.03);
     }
 
-    .testimonial-card {
+    .why-card {
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+                  background 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .testimonial-card:hover {
+    .why-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(42, 43, 47, 0.08);
+      background: rgba(252, 250, 246, 0.14);
     }
 
     .program-card {
@@ -887,90 +956,46 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="testimonials">
-    <div class="section-header reveal">
-      <span class="pill pill--brown">Real stories</span>
-      <h2 class="section-header__title">What clients are <em>saying.</em></h2>
+  <!-- WHY -->
+  <section class="why">
+    <div class="why__bg">
+      <img src="assets/why-bg.png" alt="" />
     </div>
-    <div class="testimonial-grid stagger">
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">
-          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
+    <div class="why__inner">
+      <h2 class="why__title reveal">Why <em>Heirloom?</em></h2>
+      <div class="why-grid stagger">
+        <div class="why-card">
+          <img src="assets/icon-rn.svg" alt="" class="why-card__icon" />
+          <h3 class="why-card__title">RN-led</h3>
+          <p class="why-card__desc">Not aide-led. A registered nurse leads every care plan.</p>
         </div>
-        <p class="testimonial-card__quote">"I used to lie awake replaying work conversations. Now I actually sleep through the night. Maya helped me find calm in the chaos."</p>
-        <div class="testimonial-card__author">
-          <img src="assets/testimonial-1.png" alt="" class="testimonial-card__avatar" />
-          <div>
-            <p class="testimonial-card__name">Sarah Silos</p>
-            <p class="testimonial-card__role">Marketing Director</p>
-          </div>
+        <div class="why-card">
+          <img src="assets/icon-nurse.svg" alt="" class="why-card__icon" />
+          <h3 class="why-card__title">One dedicated nurse</h3>
+          <p class="why-card__desc">A nurse who knows you, your family, and your history.</p>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">
-          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
+        <div class="why-card">
+          <img src="assets/icon-mentored.svg" alt="" class="why-card__icon" />
+          <h3 class="why-card__title">Mentored caregivers</h3>
+          <p class="why-card__desc">Caregivers who are vetted, supervised, and mentored by your nurse.</p>
         </div>
-        <p class="testimonial-card__quote">"I thought burnout was just part of entrepreneurship. Maya taught me that boundaries actually make you more effective."</p>
-        <div class="testimonial-card__author">
-          <img src="assets/testimonial-2.png" alt="" class="testimonial-card__avatar" />
-          <div>
-            <p class="testimonial-card__name">Alex Morgan</p>
-            <p class="testimonial-card__role">Startup Founder</p>
-          </div>
+        <div class="why-card">
+          <img src="assets/icon-backed.svg" alt="" class="why-card__icon" />
+          <h3 class="why-card__title">Backed by 25madison Health</h3>
+          <p class="why-card__desc">Built with the support of an established health venture studio.</p>
         </div>
       </div>
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">
-          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
-        </div>
-        <p class="testimonial-card__quote">"Coming out of a hard career transition, I needed someone who actually listened. Maya gave me the tools to navigate it with clarity."</p>
-        <div class="testimonial-card__author">
-          <img src="assets/testimonial-3.png" alt="" class="testimonial-card__avatar" />
-          <div>
-            <p class="testimonial-card__name">Elena Azalea</p>
-            <p class="testimonial-card__role">Marketing Director</p>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">
-          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
-        </div>
-        <p class="testimonial-card__quote">"Three months in and I finally feel like myself again. Honestly didn't think that was possible before working with Maya."</p>
-        <div class="testimonial-card__author">
-          <img src="assets/testimonial-4.png" alt="" class="testimonial-card__avatar" />
-          <div>
-            <p class="testimonial-card__name">James Wilson</p>
-            <p class="testimonial-card__role">Freelance Designer</p>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">
-          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
-        </div>
-        <p class="testimonial-card__quote">"The group sessions were surprisingly powerful. There's something about being seen by others going through the same thing."</p>
-        <div class="testimonial-card__author">
-          <img src="assets/testimonial-5.png" alt="" class="testimonial-card__avatar" />
-          <div>
-            <p class="testimonial-card__name">Mika Wazowski</p>
-            <p class="testimonial-card__role">Sales Manager</p>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">
-          <img src="assets/icon-star.svg" alt="★" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" /><img src="assets/icon-star.svg" alt="" />
-        </div>
-        <p class="testimonial-card__quote">"As a nurse I pour everything into others. Maya helped me understand that I matter too — and gave me real practices to act on that."</p>
-        <div class="testimonial-card__author">
-          <img src="assets/testimonial-6.png" alt="" class="testimonial-card__avatar" />
-          <div>
-            <p class="testimonial-card__name">Priya Patel</p>
-            <p class="testimonial-card__role">Nurse</p>
-          </div>
-        </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER QUOTE -->
+  <section class="founder">
+    <div class="founder__inner">
+      <img src="assets/founder.png" alt="" class="founder__photo reveal reveal--left" />
+      <div class="founder__body reveal reveal--right">
+        <p class="founder__quote">"Home care today asks families to become care coordinators overnight. We built Heirloom so that job belongs to a nurse instead, someone with real clinical judgment who treats your parent like their own. (placeholder)"</p>
+        <p class="founder__name">FOUNDER NAME</p>
+        <p class="founder__role">Founder</p>
       </div>
     </div>
   </section>
