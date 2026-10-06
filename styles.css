@@ -574,7 +574,7 @@
     }
     .fit__card-img--flat { height: 226px; border-radius: 0; }
     .fit__card-label {
-      padding: 19px 0 18px;
+      padding: 0;
       font-size: 12px;
       line-height: 19.2px;
       letter-spacing: 0.72px;
@@ -603,7 +603,7 @@
     .fit__feature--inset { padding-left: 20px; white-space: nowrap; }
     .fit__feature--wide  { grid-column: span 2; }
     .fit__who {
-      margin: 24px 0 22px;
+      margin: 0;
       padding-top: 20px;
       border-top: 1px solid var(--hl-border);
       font-size: 15px;
