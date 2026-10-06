@@ -933,6 +933,20 @@
       line-height: 19.2px;
       color: var(--hl-text-3);
     }
+    .waitlist__error {
+      font-size: 12px;
+      line-height: 19.2px;
+      color: var(--accent);
+      text-align: center;
+    }
+    .waitlist__error[hidden] { display: none; }
+    .waitlist__hp {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
     .waitlist__alt {
       display: inline-flex;
       align-items: center;
@@ -1575,8 +1589,14 @@
         </div>
       </div>
 
+      <div class="waitlist__hp" aria-hidden="true">
+        <label for="wl-website">Website</label>
+        <input id="wl-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
       <div class="waitlist__submit">
         <button type="submit" class="btn btn--brown btn--full"><span data-role-cta>Join the family waitlist</span></button>
+        <p class="waitlist__error" role="alert" hidden>We couldn't save your details. Please try again.</p>
         <p class="waitlist__note">We'll only use your details to follow up about Heirloom.</p>
       </div>
 
@@ -1732,6 +1752,7 @@
     const waitlistAlt     = document.querySelector('.waitlist__alt');
     const waitlistCta     = waitlist.querySelector('[data-role-cta]');
     const waitlistSuccess = waitlist.querySelector('.waitlist__success');
+    const waitlistError   = waitlist.querySelector('.waitlist__error');
     const WAITLIST_CTA = {
       family:    'Join the family waitlist',
       nurse:     'Apply to join the waitlist',
@@ -1769,15 +1790,18 @@
       if (!waitlist.reportValidity()) return;
       const submitBtn = waitlist.querySelector('[type="submit"]');
       submitBtn.disabled = true;
+      waitlistError.hidden = true;
       try {
-        await fetch(WAITLIST_ENDPOINT, {
+        const response = await fetch(WAITLIST_ENDPOINT, {
           method: 'POST',
-          mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(Object.fromEntries(new FormData(waitlist))),
         });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error('save failed');
       } catch (err) {
         submitBtn.disabled = false;
+        waitlistError.hidden = false;
         return;
       }
       waitlist.classList.add('is-sent');
