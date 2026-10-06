@@ -1748,7 +1748,7 @@
         field.hidden = !on;
         field.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = !on; });
       });
-      waitlistAlt.hidden = role === 'nurse';
+      if (waitlistAlt) waitlistAlt.hidden = role === 'nurse';
     };
     waitlist.addEventListener('change', (e) => {
       if (e.target.name === 'role') applyWaitlistRole();
@@ -1782,7 +1782,7 @@
       }
       waitlist.classList.add('is-sent');
       waitlistSuccess.hidden = false;
-      waitlistAlt.hidden = true;
+      if (waitlistAlt) waitlistAlt.hidden = true;
     });
 
     // ── Nav scroll state ──────────────────────────────────
