@@ -1752,8 +1752,14 @@
         </div>
       </div>
 
+      <div class="waitlist__hp" aria-hidden="true">
+        <label for="wl-website">Website</label>
+        <input id="wl-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
       <div class="waitlist__submit">
         <button type="submit" class="btn btn--brown btn--full"><span data-role-cta>Join the family waitlist</span></button>
+        <p class="waitlist__error" role="alert" hidden>We couldn't save your details. Please try again.</p>
         <p class="waitlist__note">We'll only use your details to follow up about Heirloom.</p>
       </div>
 
@@ -1895,6 +1901,7 @@
     const waitlistAlt     = document.querySelector('.waitlist__alt');
     const waitlistCta     = waitlist.querySelector('[data-role-cta]');
     const waitlistSuccess = waitlist.querySelector('.waitlist__success');
+    const waitlistError   = waitlist.querySelector('.waitlist__error');
     const WAITLIST_CTA = {
       family:    'Join the family waitlist',
       nurse:     'Apply to join the waitlist',
@@ -1911,7 +1918,7 @@
         field.hidden = !on;
         field.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = !on; });
       });
-      waitlistAlt.hidden = role === 'nurse';
+      if (waitlistAlt) waitlistAlt.hidden = role === 'nurse';
     };
     waitlist.addEventListener('change', (e) => {
       if (e.target.name === 'role') applyWaitlistRole();
@@ -1933,14 +1940,30 @@
     });
     applyWaitlistRole();
 
-    waitlist.addEventListener('submit', (e) => {
+    const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwHY3bHcAmgee2vbWPCwCEm9xpfaQ627PSbOvs86Axy_X_WeeJ2m40Hf1riB3osLc1o/exec';
+
+    waitlist.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!waitlist.reportValidity()) return;
-      // TODO: nothing is sent yet — POST Object.fromEntries(new FormData(waitlist))
-      // to the waitlist tool / CRM before launch, and only show success once it resolves.
+      const submitBtn = waitlist.querySelector('[type="submit"]');
+      submitBtn.disabled = true;
+      waitlistError.hidden = true;
+      try {
+        const response = await fetch(WAITLIST_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(Object.fromEntries(new FormData(waitlist))),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error('save failed');
+      } catch (err) {
+        submitBtn.disabled = false;
+        waitlistError.hidden = false;
+        return;
+      }
       waitlist.classList.add('is-sent');
       waitlistSuccess.hidden = false;
-      waitlistAlt.hidden = true;
+      if (waitlistAlt) waitlistAlt.hidden = true;
     });
 
     // ── Mobile nav overlay ────────────────────────────────
