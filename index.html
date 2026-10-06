@@ -139,6 +139,7 @@
       border-radius: 24px;
       overflow: hidden;
       height: 681px;
+      width: 100%;
     }
     .hero__photo {
       position: absolute;
@@ -1124,6 +1125,193 @@
     nav .nav__links a,
     nav .btn--brown { transition: filter 0.3s ease, color 0.3s ease, background 0.3s ease, opacity 0.18s; }
 
+    /* ── MOBILE NAV ─────────────────────────────────────── */
+    .nav__burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      width: 36px;
+      height: 36px;
+    }
+    .nav__burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    nav.scrolled .nav__burger span { background: #fff; }
+    .nav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      padding: 0 24px 40px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .nav-overlay.is-open { opacity: 1; visibility: visible; }
+    .nav-overlay__top {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .nav-overlay__close {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-overlay__close span {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 20px;
+      height: 1.5px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+    .nav-overlay__close span:nth-child(1) { transform: translate(-50%, -50%) rotate(45deg); }
+    .nav-overlay__close span:nth-child(2) { transform: translate(-50%, -50%) rotate(-45deg); }
+    .nav-overlay__links {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      list-style: none;
+      padding: 0;
+    }
+    .nav-overlay__links a {
+      font-family: var(--font-serif);
+      font-size: 44px;
+      font-weight: 400;
+      letter-spacing: -1px;
+      color: var(--text);
+      line-height: 1.25;
+      transition: color 0.15s;
+    }
+    .nav-overlay__links a:hover { color: var(--accent-2); }
+    .nav-overlay__cta { width: 100%; justify-content: center; }
+
+    /* ── RESPONSIVE: FOUNDER ─────────────────────────────── */
+    @media (max-width: 960px) {
+      .founder { padding: 80px 40px; }
+      .founder__inner { gap: 64px; }
+      .founder__photo { width: 300px; height: 340px; }
+      .founder__quote { font-size: 26px; }
+    }
+
+    /* ── RESPONSIVE: TABLET (≤ 900px) ───────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 32px; }
+      .nav__links { display: none; }
+      nav .btn--brown { display: none; }
+      .nav__burger { display: flex; }
+
+      .hero__inner { height: 520px; }
+      .hero__content { width: 100%; max-width: 100%; padding: 40px; top: 56px; }
+      .hero__heading { font-size: 64px; letter-spacing: -0.96px; }
+
+      .about { padding: 100px 40px 80px; }
+      .about__heading { font-size: 48px; letter-spacing: -2.5px; }
+      .about__sub { font-size: 22px; }
+
+      .hiw { padding: 80px 40px; }
+      .hiw__heading { font-size: 44px; }
+
+      .why { padding: 80px 40px; }
+      .why__title { font-size: 44px; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .footer__grid { grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+      .footer__brand { grid-column: 1 / -1; }
+    }
+
+    /* ── RESPONSIVE: MOBILE (≤ 560px) ───────────────────── */
+    @media (max-width: 560px) {
+      nav { padding: 0 20px; height: 60px; }
+
+      .hero { padding: calc(60px + 8px) 8px 8px; }
+      .hero__inner { height: auto; min-height: 480px; border-radius: 16px; }
+      .hero__content { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 100%; max-width: 100%; padding: 32px 28px 36px; text-align: center; }
+      .hero__heading { font-size: 42px; letter-spacing: -0.63px; line-height: 1.05; margin-top: 10px; }
+      .hero__sub { font-size: 15px; margin-top: 14px; margin-left: auto; margin-right: auto; }
+      .hero__ctas { flex-direction: column; align-items: center; gap: 12px; margin-top: 20px; }
+
+      .about { padding: 64px 24px; }
+      .about__photos { display: none; }
+      .about__content { max-width: 100%; }
+      .about__heading { font-size: 36px; letter-spacing: -1.8px; }
+      .about__sub { font-size: 18px; }
+
+      .hiw { padding: 64px 24px; }
+      .hiw__heading { font-size: 34px; }
+      .hiw__steps { flex-direction: column; align-items: center; gap: 40px; margin-top: 40px; }
+      .hiw__connector { display: none; }
+      .hiw__step { padding: 0 8px; max-width: 280px; }
+
+      .why { padding: 64px 24px; }
+      .why__title { font-size: 34px; }
+      .why-grid { grid-template-columns: 1fr; }
+
+      .founder { padding: 64px 24px; }
+      .founder__inner { flex-direction: column; gap: 36px; }
+      .founder__photo { width: 100%; height: 300px; }
+      .founder__quote { font-size: 22px; letter-spacing: -0.5px; }
+      .founder__name { margin-top: 20px; font-size: 16px; }
+
+      .footer__grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 48px 24px 28px; }
+    }
+
+    /* ── RESPONSIVE: SMALL MOBILE (≤ 390px, down to 320px) ── */
+    @media (max-width: 390px) {
+      nav .nav__logo img { height: 24px; }
+
+      .hero { padding: calc(60px + 6px) 6px 6px; }
+      .hero__inner { border-radius: 12px; }
+      .hero__content { padding: 24px 20px 28px; }
+      .hero__heading { font-size: 34px; }
+      .hero__sub { font-size: 14px; }
+
+      .about { padding: 48px 20px; }
+      .about__heading { font-size: 30px; letter-spacing: -1.5px; }
+      .about__sub { font-size: 16px; }
+
+      .hiw { padding: 48px 20px; }
+      .hiw__heading { font-size: 28px; }
+      .hiw__step-title { font-size: 20px; }
+
+      .why { padding: 48px 20px; }
+      .why__title { font-size: 28px; }
+
+      .fit__title { font-size: 32px; }
+      .fit__tabs { gap: 4px; padding: 4px; }
+      .fit__tab { font-size: 13px; padding: 8px 12px; }
+
+      .waitlist__title { font-size: 36px; }
+
+      footer { padding: 40px 20px 24px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1139,7 +1327,31 @@
       <li><a href="#hiw">Services</a></li>
     </ul>
     <a href="#waitlist" class="btn btn--brown">Book a Call</a>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
+    <div class="nav-overlay__top">
+      <a href="#" class="nav__logo">
+        <img src="assets/heirloom-logo-lockup.svg" alt="Heirloom" />
+      </a>
+      <button class="nav-overlay__close" aria-label="Close menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <ul class="nav-overlay__links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#hiw">Services</a></li>
+    </ul>
+    <a href="#waitlist" class="btn btn--brown nav-overlay__cta">Book a Call</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -1729,6 +1941,27 @@
       waitlist.classList.add('is-sent');
       waitlistSuccess.hidden = false;
       waitlistAlt.hidden = true;
+    });
+
+    // ── Mobile nav overlay ────────────────────────────────
+    const burger = document.querySelector('.nav__burger');
+    const overlay = document.querySelector('.nav-overlay');
+    burger.addEventListener('click', () => {
+      const isOpen = overlay.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    overlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        overlay.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    document.querySelector('.nav-overlay__close').addEventListener('click', () => {
+      overlay.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     });
 
     // ── Nav scroll state ──────────────────────────────────
