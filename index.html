@@ -16,7 +16,8 @@
       --bg-3:      #CCC3BE;
       --text:      #160202;
       --text-dark: #301408;
-      --accent:    #8A180E;
+      --accent:    #301408;
+      --accent-2:  #8a180e;
       --muted:     rgba(22, 2, 2, 0.65);
       --border:    rgba(138, 24, 14, 0.15);
       --white-dim: rgba(242, 242, 242, 0.32);
@@ -102,9 +103,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: transparent;
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      background: rgba(255, 255, 255, 0.50);
       border-bottom: 0.5px solid rgba(22, 2, 2, 0.08);
     }
     .nav__logo {
@@ -138,6 +139,7 @@
       border-radius: 24px;
       overflow: hidden;
       height: 681px;
+      width: 100%;
     }
     .hero__photo {
       position: absolute;
@@ -384,7 +386,7 @@
       letter-spacing: -3.92px;
       line-height: 1.1;
     }
-    .section-header__title em { color: var(--accent); font-style: normal; }
+    .section-header__title em { color: var(--accent-2); font-style: normal; }
     .section-header__body {
       font-size: 16px;
       letter-spacing: -0.8px;
@@ -503,7 +505,7 @@
       line-height: 47.52px;
       color: var(--hl-text);
     }
-    .fit__heading em { font-style: italic; color: var(--accent); }
+    .fit__heading em { font-style: italic; color: var(--accent-2); }
     .fit__lede {
       max-width: 448px;
       margin-top: 14px;
@@ -805,13 +807,14 @@
       line-height: 69.12px;
       color: var(--hl-text);
     }
-    .waitlist__title em { font-style: italic; color: var(--accent); }
+    .waitlist__title em { font-style: italic; color: var(--accent-2); }
     .waitlist__body {
       margin-top: 16px;
-      max-width: 440px;
       font-size: 16px;
       line-height: 25.6px;
       color: var(--hl-text-2);
+      white-space: nowrap;
+      text-align: center;
     }
     .waitlist__card {
       scroll-margin-top: 96px; /* clear the fixed nav when jumped to */
@@ -933,34 +936,6 @@
       line-height: 19.2px;
       color: var(--hl-text-3);
     }
-    .waitlist__error {
-      font-size: 12px;
-      line-height: 19.2px;
-      color: var(--accent);
-      text-align: center;
-    }
-    .waitlist__error[hidden] { display: none; }
-    .waitlist__hp {
-      position: absolute;
-      left: -10000px;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
-    .waitlist__alt {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      min-height: 44px;
-      margin-top: 22px;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 25.6px;
-      color: var(--accent);
-    }
-    .waitlist__alt img { width: 16px; height: 16px; transition: transform 0.2s ease; }
-    .waitlist__alt:hover img { transform: translateX(3px); }
-    .waitlist__alt[hidden] { display: none; }
     .waitlist__card.is-sent > :not(.waitlist__success) { display: none; }
     .waitlist__success {
       display: flex;
@@ -980,7 +955,7 @@
       letter-spacing: -0.48px;
       color: var(--hl-text);
     }
-    .waitlist__success-title em { font-style: italic; color: var(--accent); }
+    .waitlist__success-title em { font-style: italic; color: var(--accent-2); }
 
     @media (max-width: 960px) {
       .waitlist { padding: 80px 24px; }
@@ -996,83 +971,61 @@
     }
 
     /* ── CTA SECTION ────────────────────────────────────── */
-    .cta {
-      background: var(--bg-2);
-      padding: 80px 64px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-      text-align: center;
-    }
-    .cta img { height: 75px; width: auto; margin-bottom: 8px; }
-    .cta__title {
-      font-family: var(--font-serif);
-      font-size: 56px;
-      font-weight: 400;
-      letter-spacing: -3.92px;
-      line-height: 1.1;
-      max-width: 557px;
-    }
-    .cta__title em { color: var(--accent); font-style: normal; }
-    .cta__sub {
-      font-size: 18px;
-      letter-spacing: -0.9px;
-      line-height: 1.5;
-      color: var(--muted);
-      max-width: 318px;
-      margin-bottom: 8px;
-    }
 
     /* ── FOOTER ─────────────────────────────────────────── */
     footer {
-      background: var(--bg-2);
-      padding: 0 64px 32px;
+      background: var(--bg);
+      padding: 72px 24px 36px;
+      display: flex;
+      justify-content: center;
+    }
+    .footer__inner {
+      width: 100%;
+      max-width: 1180px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 48px;
-      border-top: 0.5px solid var(--border);
+      gap: 56px;
     }
-    .footer__nav {
-      width: 100%;
-      max-width: 1072px;
+    .footer__grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      padding-top: 48px;
+      grid-template-columns: 360px 1fr 225px 225px;
+      gap: 32px;
     }
-    .footer__col { display: flex; flex-direction: column; gap: 16px; }
+    .footer__brand { display: flex; flex-direction: column; gap: 0; }
+    .footer__brand img { height: 31px; width: auto; align-self: flex-start; }
+    .footer__tagline {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #5c4c43;
+      max-width: 320px;
+    }
+    .footer__col { display: flex; flex-direction: column; }
     .footer__col-title {
-      font-size: 16px;
-      font-weight: 500;
-      letter-spacing: -0.8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #2a1a12;
+    }
+    .footer__col-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
     }
     .footer__col a {
       font-size: 14px;
-      letter-spacing: -0.7px;
-      line-height: 1.5;
-      color: var(--text);
+      line-height: 1.6;
+      color: #5c4c43;
       transition: color 0.18s;
     }
-    .footer__col a:hover { color: var(--accent); }
+    .footer__col a:hover { color: var(--text); }
     .footer__bottom {
-      width: 100%;
-      max-width: 785px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      border-top: 1px solid #e4dcd2;
+      padding-top: 22px;
     }
-    .footer__rule { height: 0.5px; background: var(--border); }
     .footer__copy {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer__copy p {
-      font-size: 14px;
-      letter-spacing: -0.7px;
-      color: var(--muted);
-      white-space: nowrap;
+      font-size: 12px;
+      color: #8a7b72;
     }
 
     /* ── MOTION: HERO ENTRANCE ──────────────────────────── */
@@ -1172,6 +1125,193 @@
     nav .nav__links a,
     nav .btn--brown { transition: filter 0.3s ease, color 0.3s ease, background 0.3s ease, opacity 0.18s; }
 
+    /* ── MOBILE NAV ─────────────────────────────────────── */
+    .nav__burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      width: 36px;
+      height: 36px;
+    }
+    .nav__burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    nav.scrolled .nav__burger span { background: #fff; }
+    .nav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      padding: 0 24px 40px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .nav-overlay.is-open { opacity: 1; visibility: visible; }
+    .nav-overlay__top {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .nav-overlay__close {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-overlay__close span {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 20px;
+      height: 1.5px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+    .nav-overlay__close span:nth-child(1) { transform: translate(-50%, -50%) rotate(45deg); }
+    .nav-overlay__close span:nth-child(2) { transform: translate(-50%, -50%) rotate(-45deg); }
+    .nav-overlay__links {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      list-style: none;
+      padding: 0;
+    }
+    .nav-overlay__links a {
+      font-family: var(--font-serif);
+      font-size: 44px;
+      font-weight: 400;
+      letter-spacing: -1px;
+      color: var(--text);
+      line-height: 1.25;
+      transition: color 0.15s;
+    }
+    .nav-overlay__links a:hover { color: var(--accent-2); }
+    .nav-overlay__cta { width: 100%; justify-content: center; }
+
+    /* ── RESPONSIVE: FOUNDER ─────────────────────────────── */
+    @media (max-width: 960px) {
+      .founder { padding: 80px 40px; }
+      .founder__inner { gap: 64px; }
+      .founder__photo { width: 300px; height: 340px; }
+      .founder__quote { font-size: 26px; }
+    }
+
+    /* ── RESPONSIVE: TABLET (≤ 900px) ───────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 32px; }
+      .nav__links { display: none; }
+      nav .btn--brown { display: none; }
+      .nav__burger { display: flex; }
+
+      .hero__inner { height: 520px; }
+      .hero__content { width: 100%; max-width: 100%; padding: 40px; top: 56px; }
+      .hero__heading { font-size: 64px; letter-spacing: -0.96px; }
+
+      .about { padding: 100px 40px 80px; }
+      .about__heading { font-size: 48px; letter-spacing: -2.5px; }
+      .about__sub { font-size: 22px; }
+
+      .hiw { padding: 80px 40px; }
+      .hiw__heading { font-size: 44px; }
+
+      .why { padding: 80px 40px; }
+      .why__title { font-size: 44px; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .footer__grid { grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+      .footer__brand { grid-column: 1 / -1; }
+    }
+
+    /* ── RESPONSIVE: MOBILE (≤ 560px) ───────────────────── */
+    @media (max-width: 560px) {
+      nav { padding: 0 20px; height: 60px; }
+
+      .hero { padding: calc(60px + 8px) 8px 8px; }
+      .hero__inner { height: auto; min-height: 480px; border-radius: 16px; }
+      .hero__content { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 100%; max-width: 100%; padding: 32px 28px 36px; text-align: center; }
+      .hero__heading { font-size: 42px; letter-spacing: -0.63px; line-height: 1.05; margin-top: 10px; }
+      .hero__sub { font-size: 15px; margin-top: 14px; margin-left: auto; margin-right: auto; }
+      .hero__ctas { flex-direction: column; align-items: center; gap: 12px; margin-top: 20px; }
+
+      .about { padding: 64px 24px; }
+      .about__photos { display: none; }
+      .about__content { max-width: 100%; }
+      .about__heading { font-size: 36px; letter-spacing: -1.8px; }
+      .about__sub { font-size: 18px; }
+
+      .hiw { padding: 64px 24px; }
+      .hiw__heading { font-size: 34px; }
+      .hiw__steps { flex-direction: column; align-items: center; gap: 40px; margin-top: 40px; }
+      .hiw__connector { display: none; }
+      .hiw__step { padding: 0 8px; max-width: 280px; }
+
+      .why { padding: 64px 24px; }
+      .why__title { font-size: 34px; }
+      .why-grid { grid-template-columns: 1fr; }
+
+      .founder { padding: 64px 24px; }
+      .founder__inner { flex-direction: column; gap: 36px; }
+      .founder__photo { width: 100%; height: 300px; }
+      .founder__quote { font-size: 22px; letter-spacing: -0.5px; }
+      .founder__name { margin-top: 20px; font-size: 16px; }
+
+      .footer__grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 48px 24px 28px; }
+    }
+
+    /* ── RESPONSIVE: SMALL MOBILE (≤ 390px, down to 320px) ── */
+    @media (max-width: 390px) {
+      nav .nav__logo img { height: 24px; }
+
+      .hero { padding: calc(60px + 6px) 6px 6px; }
+      .hero__inner { border-radius: 12px; }
+      .hero__content { padding: 24px 20px 28px; }
+      .hero__heading { font-size: 34px; }
+      .hero__sub { font-size: 14px; }
+
+      .about { padding: 48px 20px; }
+      .about__heading { font-size: 30px; letter-spacing: -1.5px; }
+      .about__sub { font-size: 16px; }
+
+      .hiw { padding: 48px 20px; }
+      .hiw__heading { font-size: 28px; }
+      .hiw__step-title { font-size: 20px; }
+
+      .why { padding: 48px 20px; }
+      .why__title { font-size: 28px; }
+
+      .fit__title { font-size: 32px; }
+      .fit__tabs { gap: 4px; padding: 4px; }
+      .fit__tab { font-size: 13px; padding: 8px 12px; }
+
+      .waitlist__title { font-size: 36px; }
+
+      footer { padding: 40px 20px 24px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1183,12 +1323,35 @@
     </a>
     <ul class="nav__links">
       <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Journal</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#hiw">Services</a></li>
     </ul>
-    <a href="#" class="btn btn--brown">Book a Call</a>
+    <a href="#waitlist" class="btn btn--brown">Book a Call</a>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
+    <div class="nav-overlay__top">
+      <a href="#" class="nav__logo">
+        <img src="assets/heirloom-logo-lockup.svg" alt="Heirloom" />
+      </a>
+      <button class="nav-overlay__close" aria-label="Close menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <ul class="nav-overlay__links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#hiw">Services</a></li>
+    </ul>
+    <a href="#waitlist" class="btn btn--brown nav-overlay__cta">Book a Call</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -1199,8 +1362,8 @@
         <h1 class="hero__heading">Concierge nursing, so <em>home</em> stays home.</h1>
         <p class="hero__sub">Heirloom pairs families with a dedicated nurse who leads care at home — coordinated, personal, and built around you.</p>
         <div class="hero__ctas">
-          <a href="#" class="hero-btn--waitlist">Join the waitlist</a>
-          <a href="#" class="hero-btn--nurse">Are you a nurse? <img src="assets/icon-arrow-white.svg" alt="" /></a>
+          <a href="#waitlist" class="hero-btn--waitlist">Join the waitlist</a>
+          <a href="#waitlist" class="hero-btn--nurse" data-pick-role="nurse">Are you a nurse? <img src="assets/icon-arrow-white.svg" alt="" /></a>
         </div>
       </div>
     </div>
@@ -1208,7 +1371,7 @@
 
 
   <!-- ABOUT -->
-  <section class="about">
+  <section class="about" id="about">
     <div class="about__photos">
       <div class="about__photo about__photo--1"><img src="assets/about-scatter-1.png" alt="" /></div>
       <div class="about__photo about__photo--2"><img src="assets/about-scatter-2.png" alt="" /></div>
@@ -1224,7 +1387,7 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="hiw">
+  <section class="hiw" id="hiw">
     <div class="hiw__inner">
       <div class="reveal">
         <h2 class="hiw__heading">How it works.<br><em>Simple for you, handled by us.</em></h2>
@@ -1267,7 +1430,7 @@
 
 
   <!-- SEE WHAT FITS YOU -->
-  <section class="fit">
+  <section class="fit" id="fit">
     <div class="fit__inner">
       <div class="fit__header reveal">
         <h2 class="fit__title">See what fits <em>you.</em></h2>
@@ -1607,51 +1770,37 @@
       </div>
     </form>
 
-    <a href="#waitlist-form" class="waitlist__alt" data-pick-role="nurse">
-      Are you a nurse? Apply to join
-      <img src="assets/icon-arrow-right.svg" alt="" />
-    </a>
   </section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <a href="#" class="nav__logo reveal" style="justify-content: center;">
-      <img src="assets/heirloom-icon.svg" alt="Heirloom" />
-      <img src="assets/heirloom-wordmark.svg" alt="HEIRLOOM" class="nav__logo-wordmark" />
-    </a>
-    <h2 class="cta__title reveal">You deserve to feel like <em>yourself</em> again.</h2>
-    <p class="cta__sub reveal">Book a free discovery call and let's talk about what's weighing you down.</p>
-    <a href="#" class="btn btn--brown reveal">Begin Your Journey</a>
-  </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer__nav">
-      <div class="footer__col">
-        <p class="footer__col-title">Navigate</p>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Journal</a>
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="assets/heirloom-logo-lockup.svg" alt="Heirloom" />
+          <p class="footer__tagline">Nurse-led concierge care, so aging adults can stay home — safely, for longer.</p>
+        </div>
+        <div></div>
+        <div class="footer__col">
+          <p class="footer__col-title">Navigate</p>
+          <div class="footer__col-links">
+            <a href="#hiw">How It Works</a>
+            <a href="#fit" data-fit-tab="families">For Families</a>
+            <a href="#fit" data-fit-tab="nurses">For Nurses</a>
+            <a href="#fit" data-fit-tab="caregivers">For Caregivers</a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">Legal</p>
+          <div class="footer__col-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
       </div>
-      <div class="footer__col">
-        <p class="footer__col-title">Connect</p>
-        <a href="#">Book a Call</a>
-        <a href="#">Twitter</a>
-        <a href="#">Instagram</a>
-        <a href="#">Meta</a>
-      </div>
-      <div class="footer__col">
-        <p class="footer__col-title">Legal</p>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <div class="footer__rule"></div>
-      <div class="footer__copy">
-        <p>© 2026 Holistic. All rights reserved.</p>
-        <p>Created by Hamza Ehsan</p>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 Heirloom. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -1774,6 +1923,14 @@
     waitlist.addEventListener('change', (e) => {
       if (e.target.name === 'role') applyWaitlistRole();
     });
+    // Footer links with data-fit-tab scroll to the fit section and activate the right tab
+    document.querySelectorAll('[data-fit-tab]').forEach(link => {
+      link.addEventListener('click', () => {
+        const tab = document.getElementById(`fit-tab-${link.dataset.fitTab}`);
+        if (tab) tab.click();
+      });
+    });
+
     // Any link with data-pick-role (panel CTAs, "Are you a nurse?") jumps to the form with that role chosen
     document.querySelectorAll('[data-pick-role]').forEach(link => {
       link.addEventListener('click', () => {
@@ -1807,6 +1964,27 @@
       waitlist.classList.add('is-sent');
       waitlistSuccess.hidden = false;
       if (waitlistAlt) waitlistAlt.hidden = true;
+    });
+
+    // ── Mobile nav overlay ────────────────────────────────
+    const burger = document.querySelector('.nav__burger');
+    const overlay = document.querySelector('.nav-overlay');
+    burger.addEventListener('click', () => {
+      const isOpen = overlay.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    overlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        overlay.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    document.querySelector('.nav-overlay__close').addEventListener('click', () => {
+      overlay.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     });
 
     // ── Nav scroll state ──────────────────────────────────
