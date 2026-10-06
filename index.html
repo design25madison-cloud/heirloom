@@ -936,6 +936,37 @@
       line-height: 19.2px;
       color: var(--hl-text-3);
     }
+    .waitlist__error {
+      font-size: 12px;
+      line-height: 19.2px;
+      color: var(--accent);
+      text-align: center;
+    }
+    .waitlist__error[hidden] { display: none; }
+    .waitlist__hp {
+      position: fixed;
+      left: -9999px;
+      top: -9999px;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .waitlist__alt {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      margin-top: 22px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 25.6px;
+      color: var(--accent);
+    }
+    .waitlist__alt img { width: 16px; height: 16px; transition: transform 0.2s ease; }
+    .waitlist__alt:hover img { transform: translateX(3px); }
+    .waitlist__alt[hidden] { display: none; }
     .waitlist__card.is-sent > :not(.waitlist__success) { display: none; }
     .waitlist__success {
       display: flex;
